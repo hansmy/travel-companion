@@ -764,7 +764,7 @@
     }}), n.Icon.Default.imagePath = function () {
         var t, i, n, o, s = e.getElementsByTagName("script"), a = /\/?leaflet[\-\._]?([\w\-\._]*)\.js\??/;
         //n.split(a)[0]
-        for (t = 0, i = s.length; i > t; t++)if (n = s[t].src, o = n.match(a))return  "./css/images"
+        for (t = 0, i = s.length; i > t; t++)if (n = s[t].src, o = n.match(a))return  "./images"
     }(), n.Marker = n.Class.extend({includes: n.Mixin.Events, options: {icon: new n.Icon.Default, title: "", clickable: !0, draggable: !1, zIndexOffset: 0, opacity: 1, riseOnHover: !1, riseOffset: 250}, initialize: function (t, e) {
         n.setOptions(this, e), this._latlng = n.latLng(t)
     }, onAdd: function (t) {

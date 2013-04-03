@@ -1,0 +1,38 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+html, body, #map {
+	height: 100%;
+}
+
+a {
+	color: #00B7FF;
+}
+ul.tweets {
+	float: left;
+	clear: both
+}
+#stream {
+	float: left;
+	clear: both;
+	width: 100%
+}
+#stream ul {
+	list-style: none
+}
+#stream ul li {
+	float: left;
+	clear: left;
+	width: 100%;
+	border-bottom: 1px solid #ccc;: 5px;
+	padding: 5px 0
+}
+#stream ul li:nth-child(even) {
+	background: #f8f5f6;
+}
+#stream ul li img {
+	float: left;
+	margin-right: 10px;
+	padding: 5px
+}
