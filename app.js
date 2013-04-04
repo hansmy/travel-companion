@@ -12,7 +12,7 @@ var express = require('express')
 
 var app = express();
 app.configure(function(){
-  //app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -23,13 +23,9 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-var port  = process.env.PORT || 5000;
-var server = app.listen(port);
-var io = require('socket.io').listen(server);
-io.configure(function () { 
-  //io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 1); 
-});
+//var port  = process.env.PORT || 5000;
+//var server = app.listen(port);
+
 
 app.configure('development', function(){
   app.use(express.errorHandler());
@@ -38,10 +34,14 @@ app.configure('development', function(){
 app.get('/', routes.index);
 //app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
-
+var io = require('socket.io').listen(server);
+io.configure(function () { 
+  //io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 1); 
+});
 /****************************************************************/
 /*
 /*          Twitter Connection
