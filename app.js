@@ -50,14 +50,16 @@ io.configure(function () {
 
 
 var twit = new twitter({
-  consumer_key: '4gSOBLNKoe4mzmzbJJnyPQ',
-    consumer_secret: 'KJ5PEMySOVEcYwZLNkgK3ps5SsITnvL6pIK02canYH0',
-    access_token_key: '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
-    access_token_secret: '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'
+  consumer_key: 'Uhy8TvwtpYywzG1VzBesaQ',
+    consumer_secret: 'jtNYZBP4icsEe1mTdgLzzylR2hUFxNjHKSVTSKXE7U',
+    access_token_key: '240243946-Kq9OU8vdhRisEVaXWMAdBZDpON4YZkCww3zWGnwG',
+    access_token_secret: 'Vz5RsCplEUFXI4FTL26gvDSLjusGOCZnKanQtFsJXp'
 });
 //51.527264,  -0.10247  
-//twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
-twit.stream('statuses/filter', {'locations':'-0.11247,51.537264,-0.09247,51.517264'}, function(stream) {
+twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+//twit.stream('statuses/filter', {'locations':'-1.19,52.55,-0.01,50.48'}, function(stream) {
+
+//twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
     stream.on('data', function (data) {
        io.sockets.volatile.emit('tweet', data);
     });
