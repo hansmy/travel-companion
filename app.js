@@ -55,7 +55,9 @@ var twit = new twitter({
     access_token_key: '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
     access_token_secret: '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'
 });
-twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+//51.527264,  -0.10247  
+//twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+twit.stream('statuses/filter', {'locations':'-0.11247,51.537264,-0.09247,51.517264'}, function(stream) {
     stream.on('data', function (data) {
        io.sockets.volatile.emit('tweet', data);
     });
