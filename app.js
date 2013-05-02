@@ -50,18 +50,20 @@ io.configure(function () {
 
 
 var twit = new twitter({
-  consumer_key: 'Uhy8TvwtpYywzG1VzBesaQ',
-    consumer_secret: 'jtNYZBP4icsEe1mTdgLzzylR2hUFxNjHKSVTSKXE7U',
+  consumer_key: 'InirzwROIcYjwOX30rOcAA',
+    consumer_secret: 'f7uZUwbrLK1TCEY5QXkCFK5ciCXWaQqiDs9c44k',
     access_token_key: '240243946-Kq9OU8vdhRisEVaXWMAdBZDpON4YZkCww3zWGnwG',
-    access_token_secret: 'Vz5RsCplEUFXI4FTL26gvDSLjusGOCZnKanQtFsJXp'
+    access_token_secret: 'Vz5RsCplEUFXI4FTL26gvDSLjusGOCZnKanQtFsJXpI'
 });
 //51.527264,  -0.10247  
-twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
-//twit.stream('statuses/filter', {'locations':'-1.19,52.55,-0.01,50.48'}, function(stream) {
+//twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+twit.stream('statuses/filter', {'locations':'-0.1125,51.5071,-0.0923,51.5473'}, function(stream) {
 
 //twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
     stream.on('data', function (data) {
        io.sockets.volatile.emit('tweet', data);
     });
 });
+
+
 
