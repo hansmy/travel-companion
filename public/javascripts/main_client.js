@@ -31,6 +31,19 @@ view.loadMap=function(){
         attribution : 'Map data from &copy OpenStreetMap via CloudMade.'
     }).addTo(map);
     view.map=map;
+    L.control.locate({
+    position: 'topleft',  // set the location of the control
+    drawCircle: true,  // controls whether a circle is drawn that shows the uncertainty about the location
+    follow: false,  // follow the location if `watch` and `setView` are set to true in locateOptions
+    circleStyle: {},  // change the style of the circle around the user's location
+    markerStyle: {},
+    metric: true,  // use metric or imperial units
+    onLocationError: function(err) {alert(err.message)},  // define an error callback function
+    title: "Show me where I am",  // title of the locat control
+    popupText: ["You are within ", " from this point"],  // text to appear if user clicks on circle
+    setView: true, // automatically sets the map view to the user's location
+    locateOptions: {}  // define location options e.g enableHighAccuracy: true
+}).addTo(map);
 }
 view.addMarker=function(lat,lon,map,twt){
 	L.marker([lat,lon]).addTo(map).bindPopup(view.buildTwitterHtml(twt)).openPopup();
