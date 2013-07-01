@@ -28,6 +28,7 @@ L.Control.Locate = L.Control.extend({
         title: "Show me where I am",
         popupText: ["You are within ", " from this point"],
         setView: true, // automatically sets the map view to the user's location
+        maxZoom : 15,
         locateOptions: {}
     },
 

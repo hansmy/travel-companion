@@ -1,0 +1,86 @@
+<html>
+
+	<head>
+		<title>Leaflet Example</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="../public/stylesheets/leaflet.css">
+		<link rel="stylesheet" type="text/css" href="../public/stylesheets/L.Control.Locate.css">
+		<link rel="stylesheet" type="text/css" href="../public/javascripts/lib/L.PhotoMarker/leaflet.photomarker.css">
+		<link rel="stylesheet" type="text/css" href="../public/javascripts/lib/markercluster/MarkerCluster.css">
+		<link rel="stylesheet" type="text/css" href="../public/javascripts/lib/markercluster/MarkerCluster.Default.css">
+		<script src="../public/javascripts/lib/leaflet/leaflet.js"></script>
+		<script src="../public/javascripts/lib/L.Control.Locate.js"></script>
+		<script src="../public/javascripts/lib/markercluster/leaflet.markercluster-src.js"></script>
+		<script src="../public/javascripts/lib/L.PhotoMarker/PhotoMarkerMatrix.js"></script>
+		<script src="../public/javascripts/lib/L.PhotoMarker/PhotoIcon.js"></script>
+		<script src="../public/javascripts/lib/L.PhotoMarker/PhotoMarker.js"></script>
+		<script src="../public/javascripts/tc.flickr.view.js"></script>
+		<script src="../public/javascripts/tc.flickr.view.control.js"></script>
+	</head>
+	<body>
+		<h2>Leaflet.PhotoLayer x<span id="zoom"></span><span id="loading"> loading...</span></h2>
+		<div id="map" style="height: 650px;width:750"></div>
+		<div id="modal" class="modal hide">
+			<div class="modal-header">
+
+				<h3>Modal header</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					One fine bodyâ€¦
+				</p>
+			</div>
+		</div>
+		<p>
+			Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a><img src="http://developer.mapquest.com/content/osm/mq_logo.png">
+		</p>
+		<script type="text/javascript">
+			// Init the map
+			map = L.map('map');
+			map.locate({
+				setView : true,
+				maxZoom : 15
+			});
+
+			// Zoom stuff
+			$("#zoom").html(map.getZoom());
+			map.on('zoomend', function(e) {
+				$("#zoom").html(map.getZoom());
+			});
+
+			// Mapquest open layer
+			L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+				attribution : 'Map data &copy; OpenStreetMap contributors',
+				maxZoom : 19,
+				minZoom : 11
+			}).addTo(map);
+
+			var canvasTiles = L.tileLayer.canvas();
+
+			canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+				var ctx = canvas.getContext('2d');
+				// draw something on the tile canvas
+			}
+			L.control.locate({
+				position : 'topright', // set the location of the control
+				drawCircle : true, // controls whether a circle is drawn that shows the uncertainty about the location
+				follow : false, // follow the location if `watch` and `setView` are set to true in locateOptions
+				circleStyle : {}, // change the style of the circle around the user's location
+				markerStyle : {},
+				metric : true, // use metric or imperial units
+				onLocationError : function(err) {
+					alert(err.message)
+				}, // define an error callback function
+				title : "Show me where I am", // title of the locat control
+				popupText : ["You are within ", " from this point"], // text to appear if user clicks on circle
+				setView : true, // automatically sets the map view to the user's location
+				locateOptions : {} // define location options e.g enableHighAccuracy: true
+			}).addTo(map);
+			//flickr control
+			L.control.flickr().addTo(map);
+
+		</script>
+	</body>
+</html>

@@ -26,7 +26,8 @@ view.map = null;
 
 view.loadMap = function() {
 	//,
-	var map = L.map('map').setView([3.43, -76.52], 13);;
+	var map = L.map('map').setView([3.43, -76.52], 13);
+	;
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/71475/256/{z}/{x}/{y}.png', {
 		maxZoom : 18,
@@ -48,6 +49,10 @@ view.loadMap = function() {
 		setView : true, // automatically sets the map view to the user's location
 		locateOptions : {} // define location options e.g enableHighAccuracy: true
 	}).addTo(map);
+
+	map.on('locationfound', function(e) {
+		
+	});
 }
 view.addMarker = function(lat, lon, map, twt) {
 	L.marker([lat, lon]).addTo(map).bindPopup(view.buildTwitterHtml(twt)).openPopup();
