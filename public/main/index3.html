@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset=utf-8 />
-		<title>Ambiecities</title>
+		<title>Ember Leaflet</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 
 							<div class="container">
 								<!-- Be sure to leave the brand out there if you want it shown -->
-								<!--<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>-->
+								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 								<a class="brand" href="#">AmbieCities</a>
 								<span id="searchbox">
 									<form class="navbar-search form-search">
@@ -36,28 +36,29 @@
 											</button>
 										</div>
 
-									</form> </span>
-								<!--<div class="nav-collapse collapse">-->
-								<ul class="nav nav-pills pull-right">
+									</form>
+								</span>
+								<div class="nav-collapse collapse">
+									<ul class="nav nav-pills pull-right">
 
-									<li class="active">
-										<a href="#map"  data-toggle="tab">Map</a>
-									</li>
+										<li>
+											<a href="#map" class="active" data-toggle="tab">Map</a>
+										</li>
 
-									<li>
-										<a href="#list" data-toggle="tab">List</a>
-									</li>
+										<li>
+											<a href="#list" data-toggle="tab">List</a>
+										</li>
 
-									<li>
-										<a href="#my_location"><i class="icon-globe"></i></a>
-									</li>
+										<li>
+											<a href="#my_location">My Location <i class="icon-globe"></i></a>
+										</li>
 
-								</ul>
+									</ul>
+
+								</div>
+								<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 
 							</div>
-							<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-
-							<!--</div><!-- nav-collapse-->
 
 						</div>
 					</div><!-- /.navbar -->
@@ -65,74 +66,69 @@
 				</div>
 
 			</div><!-- /.floatbar -->
+			<div id="container">
+				<div class="tab-content">
+					<div class="tab-pane active" id="map">
 
-			<div class="tab-content">
-				<div class="tab-pane active" id="map">
+						<div id="application" >
 
-					<div id="application" >
-
-					</div>
-
-				</div>
-				<div class="tab-pane" id="list">
-
-					<div id="banner">
+						</div>
 
 					</div>
+					<div class="tab-pane" id="list">
+						<h3>List <small>Scroll, find or filter!</small></h3>
 
-					<h3>List <small>Scroll, find or filter!</small></h3>
+						<ul class="thumbnails">
+							<li class="span4">
+								<div class="thumbnail">
+									<img src="http://cdn.londonandpartners.com/visit/london-organisations/houses-of-parliament/63950-640x360-london-icons2-640.jpg" alt="300x200" style="">
+									<div class="caption">
+										<h3>Westmister</h3>
+										<p>
+											Ipsum ipsum ipsumi psum ipsumip sumip sumips umipsum
+											ipsum ipsumi psum ipsumip sumip.
+										</p>
+										<p>
+											<a href="#" class="btn btn-primary">Visit now!</a><a href="#"
+											class="btn">Later...</a>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="span4">
+								<div class="thumbnail">
+									<img src="http://www.swiftcars.co.uk/DesktopModules/SC_ImageGallery/Data/Modules/module_524/Images/londonlight.jpg" alt="300x200" style="">
+									<div class="caption">
+										<h3>Tower of London</h3>
+										<p>
+											Ipsum ipsumi psum ipsumip sumip.
+										</p>
+										<p>
+											<a href="#" class="btn btn-primary">Visit Now!</a><a href="#"
+											class="btn">Later...</a>
+										</p>
+									</div>
+								</div>
+							</li>
+							<li class="span4">
+								...
+							</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="tab3">
+						<p>
+							I'm in section C.
+						</p>
+					</div>
+				</div>
 
-					<ul class="thumbnails">
-						<li class="span4">
-							<div class="thumbnail section">
-								<img src="http://cdn.londonandpartners.com/visit/london-organisations/houses-of-parliament/63950-640x360-london-icons2-640.jpg" alt="300x200" style="">
-								<div class="caption">
-									<h3>Westmister</h3>
-									<p>
-										Ipsum ipsum ipsumi psum ipsumip sumip sumips umipsum
-										ipsum ipsumi psum ipsumip sumip.
-									</p>
-									<p>
-										<a href="#" class="btn btn-primary">Visit now!</a><a href="#"
-										class="btn">Later...</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="span4">
-							<div class="thumbnail section">
-								<img src="http://www.swiftcars.co.uk/DesktopModules/SC_ImageGallery/Data/Modules/module_524/Images/londonlight.jpg" alt="300x200" style="">
-								<div class="caption">
-									<h3>Tower of London</h3>
-									<p>
-										Ipsum ipsumi psum ipsumip sumip.
-									</p>
-									<p>
-										<a href="#" class="btn btn-primary">Visit Now!</a><a href="#"
-										class="btn">Later...</a>
-									</p>
-								</div>
-							</div>
-						</li>
-						<li class="span4">
-							...
-						</li>
-					</ul>
+				<div class="footer">
+					<p>
+						&copy; Ambiesense
+					</p>
 				</div>
 			</div>
-			<div class="tab-pane" id="tab3">
-				<p>
-					I'm in section C.
-				</p>
-			</div>
-
-			<div class="footer">
-				<p>
-					&copy; Ambiesense
-				</p>
-			</div>
-		</div>
-		<!-- /container -->
+			<!-- /container -->
 		</div>
 		<!-- /Wraper -->
 		<script type="text/x-handlebars" data-template-name="index">
@@ -159,4 +155,3 @@
 
 	</body>
 </html>
-

@@ -405,8 +405,11 @@ Ember.LeafletView = Ember.View.extend({
     createMap : function() {
         var zoomLevel = this.get('zoomLevel');
         var center = this.get('center');
-        var map = L.map(this.$().get(0)).setView([center.get('lat'), center.get('lng')], zoomLevel);
+        var map = L.map(this.$().get(0),{ zoomControl:false }).setView([center.get('lat'), center.get('lng')], zoomLevel);
         // add an OpenStreetMap tile layer
+        var zoomControl = new L.Control.Zoom({ position: 'bottomright'} );
+        zoomControl.addTo(map);
+        
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
