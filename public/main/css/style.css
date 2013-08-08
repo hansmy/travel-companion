@@ -60,6 +60,7 @@ html, body {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	z-index: 2;
 }
 
 #nav ul li {
@@ -76,6 +77,7 @@ html, body {
 	padding: 8px 0 8px 15px;
 	text-transform: uppercase;
 	width: 70%;
+	z-index: 2
 }
 
 #nav ul li.active {
@@ -96,6 +98,7 @@ html, body {
 	overflow: hidden;
 	padding-left: 10px;
 	width: 0;
+	z-index: 2
 }
 
 .btn-navbar {
@@ -258,22 +261,11 @@ div.input-append .active {
 		position: fixed;
 		left: 4%;
 		right: 4%;
-		top: 0%;
+		top: 2%;
 		width: 85%;
-		z-index: 2;
 		min-width: 323px;
 	}
-	#searchbox {
-		height: 30px;
-		padding: 0;
-		padding: 0;
-		position: fixed;
-		left: 5%;
-		right: 5%;
-		top: 10%;
-		width: 90%;
-		z-index: 2;
-	}
+
 	#banner {
 		height: 90px;
 		left: 0%;
@@ -281,14 +273,7 @@ div.input-append .active {
 		top: 0%;
 		width: 95%;
 	}
-	#searchbox {
-		height: 25px;
-		left: 5%;
-		right: 5%;
-		top: 8%;
-		width: 90%;
-		z-index: 2;
-	}
+
 	/*Container*/
 	.thumbnails {
 		padding-left: 5%;
@@ -297,8 +282,13 @@ div.input-append .active {
 		left: 5%;
 		width: 90%;
 	}
+	.navbar .container{
+		padding-bottom: 10px;
+	}
+	
 }
 @media screen and (max-width: 350px) {
+	
 	html, body {
 		margin: 0;
 		height: 100%;
@@ -306,7 +296,50 @@ div.input-append .active {
 		margin: 0;
 		padding-left: 0;
 		padding-left: 0;
-		min-width: 334px;
+		min-width: 250px;
+	}
+
+	#sidebar {
+		/*background-color: #9A0058/*#671E79;/*#16a085*/;
+		height: 20px;
+		max-height: 25px;
+		/*	left: 1%;
+		 right: 18%;
+		 top: 0%;
+		 width: 60%;
+		 z-index: 2;
+		 */
+		min-width: 250px;
+	}
+
+	#banner {
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		width: 94%;
+	}
+	.navbar-search{
+		margin-top: 1px;
+	}
+	.form-search{
+		margin-right: 0;
+	}
+	.navbar .container{
+		padding-bottom: 3px;
+	}
+	#btn-option{
+		padding: 1px 1px 1px 1px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding-left: 0;
+		padding-left: 0;
 	}
 	#sidebar {
 		/*background-color: #9A0058/*#671E79;/*#16a085*/;
@@ -314,10 +347,8 @@ div.input-append .active {
 		max-height: 25px;
 		left: 1%;
 		right: 18%;
-		top: 0%;
+		top: 1%;
 		width: 60%;
-		z-index: 2;
-		min-width: 320px;
 	}
 	#banner {
 		left: 0%;
@@ -325,4 +356,42 @@ div.input-append .active {
 		top: 0%;
 		width: 94%;
 	}
+	#nav ul li {
+		color: #F1F1F1;
+		cursor: pointer;
+		display: inline-block;
+		line-height: 15px;
+		filter: alpha(opacity=40);
+		font-size: 13px;
+		font-size: 1.6 rem;
+		font-style: normal;
+		font-weight: 100;
+		opacity: .4;
+		padding: 3px 0 3px 7px;
+		text-transform: uppercase;
+		width: 60%;
+	}
+	.navbar .brand {
+		padding: 5px 0 0 5px;
+	}
+	#nav ul li.active {
+		filter: alpha(opacity=100);
+		opacity: 1;
+	}
+
+	#nav ul li.last {
+		padding-right: 0px;
+	}
+
+	#nav li span {
+		display: inline-block;
+		font-size: 10px;
+		font-size: 1.4 rem;
+		height: 0;
+		opacity: 0;
+		overflow: hidden;
+		padding-left: 5px;
+		width: 0;
+	}
+
 }
