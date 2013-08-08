@@ -254,17 +254,6 @@ div.input-append .active {
 		padding-left: 0;
 	}
 	/*Menu*/
-	#sidebar {
-		/*background-color: #9A0058/*#671E79;/*#16a085*/;
-		height: 30px;
-		padding: 0;
-		position: fixed;
-		left: 4%;
-		right: 4%;
-		top: 2%;
-		width: 85%;
-		min-width: 323px;
-	}
 
 	#banner {
 		height: 90px;
@@ -303,12 +292,10 @@ div.input-append .active {
 		/*background-color: #9A0058/*#671E79;/*#16a085*/;
 		height: 20px;
 		max-height: 25px;
-		/*	left: 1%;
-		 right: 18%;
-		 top: 0%;
-		 width: 60%;
-		 z-index: 2;
-		 */
+		left: 8%;
+		right: 8%;
+		top: 1%;
+		width: 84%;
 		min-width: 250px;
 	}
 
@@ -345,10 +332,10 @@ div.input-append .active {
 		/*background-color: #9A0058/*#671E79;/*#16a085*/;
 		height: 20px;
 		max-height: 25px;
-		left: 1%;
-		right: 18%;
+		left: 8%;
+		right: 8%;
 		top: 1%;
-		width: 60%;
+		width: 84%;
 	}
 	#banner {
 		left: 0%;
