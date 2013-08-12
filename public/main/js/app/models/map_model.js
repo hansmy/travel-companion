@@ -6,7 +6,8 @@
 App.Twitter = Ember.Object.extend(Ember.LeafletMarkerMixin, {
 	highlight : false,
 	draggable : true,
-	popupBinding : 'name',
+	title : 'name',
+	popupBinding : 'text',
 	// Default normal icon
 	normalIcon : L.AwesomeMarkers.icon({
 		icon : 'twitter',
@@ -31,7 +32,11 @@ App.Twitter = Ember.Object.extend(Ember.LeafletMarkerMixin, {
 		} else {
 			this.set('icon', this.get('normalIcon'));
 		}
-	}.observes('highlight', 'marker', 'map')
+	}.observes('highlight', 'marker', 'map'),
+	format : function() {
+		var str = "<span><img style='float: left' src='" + twt.user.profile_image_url_https + "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/" + twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>" + "<p>" + twt.text + "</p>"
+		return str;
+	}
 });
 
 App.Pipe = Ember.Object.extend(Ember.LeafletPolylineMixin, {
