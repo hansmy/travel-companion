@@ -1,10 +1,10 @@
 // Example Controller
 
 App.IndexController = Ember.ObjectController.extend({
-	zoom : 13,
+	zoom : 12,
 	_idCache : {},
 	center : Ember.Object.create({
-		lat : 51.505, 
+		lat : 51.505,
 		lng : -0.09
 	}),
 	supermarkets : Ember.A([App.Twitter.create({
@@ -59,10 +59,18 @@ App.IndexController = Ember.ObjectController.extend({
 		var geo = twt.geo.coordinates;
 
 		if ( typeof this._idCache[id] === "undefined") {
-			if (geo != null||geo != undefined) {
-				var message=function() {
-						var str = "<span><img style='float: left' src='" + twt.user.profile_image_url_https + "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/" + twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>" + "<p>" + twt.text + "</p>"
-						return str;
+			if (geo != null || geo != undefined) {
+				var addTwitterLinks = function (text) {
+					return text.replace(/[\@\#]([a-zA-z0-9_]*)/g, function(m, m1) {
+						var t = '<a href="http://twitter.com/';
+						if (m.charAt(0) == '#')
+							t += 'hashtag/';
+						return t + encodeURI(m1) + '" target="_blank">' + m + '</a>';
+					});
+				}
+				var message = function() {
+					var str = "<span><img style='float: left' src='" + twt.user.profile_image_url_https + "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/" + twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>" + "<p>" + addTwitterLinks(twt.text) + "</p>"
+					return str;
 				};
 				this.get('supermarkets').pushObject(App.Twitter.create({
 					location : {

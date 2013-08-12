@@ -42,10 +42,10 @@ io.configure(function() {
  /****************************************************************/
 
 var twit = new twitter({
-	consumer_key : 'InirzwROIcYjwOX30rOcAA',
-	consumer_secret : 'f7uZUwbrLK1TCEY5QXkCFK5ciCXWaQqiDs9c44k',
-	access_token_key : '240243946-Kq9OU8vdhRisEVaXWMAdBZDpON4YZkCww3zWGnwG',
-	access_token_secret : 'Vz5RsCplEUFXI4FTL26gvDSLjusGOCZnKanQtFsJXpI'
+	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
+	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
+	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
+	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'
 });
 //51.527264,  -0.10247
 //twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
