@@ -40,13 +40,23 @@ io.configure(function() {
  /*          Twitter Connection
  /*
  /****************************************************************/
-
+/**Production- TravelCompanionApp on Twitter*/
 var twit = new twitter({
 	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
 	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
 	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
 	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'
 });
+
+/**Development- AmbiecitiesApp on Twitter**/
+
+twit = new twitter({
+	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
+	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
+	access_token_key : '240243946-8CvFbfNKW1p934JmOdiovKx7Y4m9yicDdqoy02mU',
+	access_token_secret : 'vUV2IjnDwzSERugR949RvUmeQmm7drU0upfzeKI08s'
+});
+/***************************************************/
 //51.527264,  -0.10247
 //twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
 twit.stream('statuses/filter', {

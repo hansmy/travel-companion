@@ -4,4 +4,5 @@ App.IndexView = Ember.View.extend({
             selector : 'a[rel="tooltip"], [data-toggle="tooltip"]'
         });
     }
+    
 });

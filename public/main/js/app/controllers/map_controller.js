@@ -1,43 +1,16 @@
 // Example Controller
-
+var MAX_SIZE_TWEETS_MODAL = 20;
 App.IndexController = Ember.ObjectController.extend({
 	zoom : 12,
 	_idCache : {},
+	_lastTweet : null,
 	center : Ember.Object.create({
 		lat : 51.505,
 		lng : -0.09
 	}),
-	supermarkets : Ember.A([App.Twitter.create({
-		name : 'A',
-		text : "",
-		location : {
-			lat : 41.276081,
-			lng : -8.356861
-		}
-	}), App.Twitter.create({
-		name : 'B',
-		text : "",
-		location : {
-			lat : 41.276081,
-			lng : -8.366861
-		}
-	}), App.Twitter.create({
-		name : 'C',
-		text : "",
-		location : {
-			lat : 41.276081,
-			lng : -8.376861
-		}
-	}), App.Twitter.create({
-		name : 'D',
-		text : "",
-		location : {
-			lat : 41.276081,
-			lng : -8.386861
-		}
-	})]),
+	markers : Ember.A(),
 	remove : function(s) {
-		this.get('supermarkets').removeObject(s);
+		this.get('markers').removeObject(s);
 	},
 	zoomIn : function() {
 		this.incrementProperty('zoom');
@@ -46,12 +19,12 @@ App.IndexController = Ember.ObjectController.extend({
 		this.decrementProperty('zoom');
 	},
 	add : function() {
-		this.get('supermarkets').pushObject(App.Supermarket.create({
+		this.get('markers').pushObject(App.Supermarket.create({
 			location : {
 				lat : this.get('center.lat'),
 				lng : this.get('center.lng')
 			},
-			name : 'New Marker'
+			name : 'Tweets'
 		}));
 	},
 	addTweet : function(twt) {
@@ -60,7 +33,12 @@ App.IndexController = Ember.ObjectController.extend({
 
 		if ( typeof this._idCache[id] === "undefined") {
 			if (geo != null || geo != undefined) {
-				var addTwitterLinks = function (text) {
+				var addLinksTwitter = function(text) {
+					return text.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+						return url.link(url);
+					});
+				}
+				var addHashTags = function(text) {
 					return text.replace(/[\@\#]([a-zA-z0-9_]*)/g, function(m, m1) {
 						var t = '<a href="http://twitter.com/';
 						if (m.charAt(0) == '#')
@@ -69,17 +47,42 @@ App.IndexController = Ember.ObjectController.extend({
 					});
 				}
 				var message = function() {
-					var str = "<span><img style='float: left' src='" + twt.user.profile_image_url_https + "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/" + twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>" + "<p>" + addTwitterLinks(twt.text) + "</p>"
+					var str = "<span class='.tweet'" + "><img style='float: left' src='" + twt.user.profile_image_url_https;
+					str += "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/";
+					str += twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>";
+					str += "<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
 					return str;
-				};
-				this.get('supermarkets').pushObject(App.Twitter.create({
+				}
+				var marker = App.Twitter.create({
 					location : {
 						lat : geo[0],
 						lng : geo[1]
 					},
 					text : message(),
 					name : "Tweet"
-				}));
+				});
+				if (this._lastTweet != null) {
+					this.changeIcon(this._lastTweet, L.AwesomeMarkers.icon({
+						icon : 'twitter',
+						color : 'blue'
+					}));
+				}
+				this._lastTweet = marker;
+				var real = marker.get('marker');
+				var that = this;
+				real.on('click', function(e) {
+
+					var title = marker.name;
+
+					var text = marker.text;
+					$("#myModal .modal-body").html(text);
+
+					$('#myModal').modal({
+						keyboard : false
+					});
+
+				});
+				this.get('markers').pushObject(marker);
 				this._idCache[id] = twt.id;
 			}
 		}
