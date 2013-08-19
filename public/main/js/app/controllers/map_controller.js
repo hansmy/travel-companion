@@ -51,6 +51,17 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/";
 					str += twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>";
 					str += "<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
+					//Bootstrap Format
+					str=" <li class='media'>";
+					str+="<a class='pull-left' href=''http://twitter.com/"+ twt.user.screen_name +"'>";
+					str+="<img class='media-object' src='"+twt.user.profile_image_url_https+"'>";
+					str+="</a>"+"<div class='media-body'>";
+					str+="<span class='media-heading'> <strong> "+twt.user.name +"</strong> "+"<a href ='http://twitter.com/";
+					str+= twt.user.screen_name + "'>@" + twt.user.screen_name + "</a> </span>";
+				    str+="<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
+					str+="</div>";//closing the media-body
+					str+="</li>"
+					
 					return str;
 				}
 				var marker = App.Twitter.create({
@@ -75,7 +86,19 @@ App.IndexController = Ember.ObjectController.extend({
 					var title = marker.name;
 
 					var text = marker.text;
-					$("#myModal .modal-body").html(text);
+					$("#myModal .modal-body .selectedTweet .media-list").html(text);
+					/*The latest tweets on the map*/
+					var aMarkers = that.get('markers').toArray().reverse();
+					var last = (aMarkers.length >= MAX_SIZE_TWEETS_MODAL ) ? MAX_SIZE_TWEETS_MODAL : aMarkers.length - 1;
+					//Maximum Size
+					aMarkers = aMarkers.slice(0, last);
+					$("#myModal .modal-body #media-container .media-list").html("");
+					aMarkers.forEach(function(item) {
+						if (item != marker) {
+							$("#myModal .modal-body #media-container .media-list").append(item.text);
+						}
+
+					});
 
 					$('#myModal').modal({
 						keyboard : false
