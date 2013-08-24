@@ -289,12 +289,13 @@ Ember.LeafletView = Ember.View.extend({
 	}.observes('zoomLevel'),
 	moving : false,
 	// should we try to setView on current location?
-	locate : true,
+	locate : false,
 	panOnLocate : true,
 	//default center
+	//
 	center : Ember.Object.create({
-		lat : 51.505,
-		lng : -0.09
+		lat : 3.420744,//51.505,
+		lng : -76.521431//-0.09
 	}),
 	centerDidChange : function() {
 		var center = this.get('center');
@@ -423,9 +424,11 @@ Ember.LeafletView = Ember.View.extend({
 	createMap : function() {
 		var zoomLevel = this.get('zoomLevel');
 		var center = this.get('center');
+		
+		var latln =[3.420744, -76.521431];
 		var map = L.map(this.$().get(0), {
 			zoomControl : false
-		}).setView([center.get('lat'), center.get('lng')], zoomLevel);
+		}).setView(latln, zoomLevel);
 		// add an OpenStreetMap tile layer
 		var zoomControl = new L.Control.Zoom({
 			position : 'bottomright'

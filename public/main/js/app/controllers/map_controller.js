@@ -47,21 +47,33 @@ App.IndexController = Ember.ObjectController.extend({
 					});
 				}
 				var messagePopup = function(tweet) {
-					var timeAgo = new Date(tweet.created_at);
-					var timestamp = moment(timeAgo).fromNow();
+					/*moment.fn.fromNowOrNow = function(a) {
+						if (Math.abs(moment().diff(this)) < 25000) {// 25 seconds before or after now
+							return 'just now';
+						}
+						return this.fromNow(a);
+					}*/
+					
+					var timeAgo = moment(new Date(tweet.created_at));
+					var timeNow = moment(new Date().now);
+					
+				
+					var dif=moment().diff(timeAgo);
+					var timestamp=timeAgo.from(timeNow);
+				
 					var str = "<div class='container-popup' >"
 					str += "<span class='tweet'" + "><img style='float: left' src='" + tweet.user.profile_image_url_https;
 					str += "' />" + "<b>" + tweet.user.screen_name + "</b><br/><a href ='http://twitter.com/";
 					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a><br/> " + "</span>";
 					str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += " <li class='media tweet'>";
-					str = "<div class='row' ><div class='container-popup' >"
+					str = "<div class='row' ><div class='span5' >"
 					str += "<a class='pull-left' href=''http://twitter.com/" + tweet.user.screen_name + "'>";
 					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
 					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
-					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a> </span>";
-					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span>";
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>";
+					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span> </span>";
 					str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += "</div>";
 					str += "</div>"
@@ -72,15 +84,20 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "</li>"
 					return str;
 				};
-				var message = function() {
+				var message = function(tweet) {
+					var timeAgo = moment(new Date(tweet.created_at));
+					var timeNow = moment(new Date().now);
+					var dif=moment().diff(timeAgo);
+					var timestamp=timeAgo.from(timeNow);
 					//Bootstrap Format
 					str = " <li class='media tweet'>";
-					str += "<a class='pull-left' href=''http://twitter.com/" + twt.user.screen_name + "'>";
-					str += "<img class='media-object' src='" + twt.user.profile_image_url_https + "'>";
+					str += "<a class='pull-left' href=''http://twitter.com/" + tweet.user.screen_name + "'>";
+					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
-					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
-					str += twt.user.screen_name + "'>@" + twt.user.screen_name + "</a> </span>";
-					str += "<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
+					str += "<span class='media-heading'> <strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
+					str += tweet.user.screen_name + "'>@" + twt.user.screen_name + "</a>" ;
+					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span> </span>";
+					str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += "</div>";
 					//closing the media-body
 					str += "</li>"
@@ -92,8 +109,8 @@ App.IndexController = Ember.ObjectController.extend({
 						lat : geo[0],
 						lng : geo[1]
 					},
-					text : message(),
-					tweet :twt,
+					text : message(twt),
+					tweet : twt,
 					textpopup : "<ul class='media-list'>" + messagePopup(twt) + "</ul>",
 					name : "Tweet"
 				});
@@ -108,17 +125,16 @@ App.IndexController = Ember.ObjectController.extend({
 				var that = this;
 				//
 				real.on('click', function() {
-					var twt=marker.get('tweet');
+					var twt = marker.get('tweet');
 					var textpopup = "<ul class='media-list'>" + messagePopup(twt) + "</ul>";
-					marker.set('textpopup',textpopup);
-					
-					
+					marker.set('textpopup', textpopup);
+
 					$('.openModal').click('click', function(e) {
 
 						var title = marker.name;
 
-						var text = marker.text;
-						$("#myModal .modal-body .selectedTweet .media-list").html(text);
+						var twt = marker.get('tweet');
+						$("#myModal .modal-body .selectedTweet .media-list").html(message(twt));
 						/*The latest tweets on the map*/
 						var aMarkers = that.get('markers').toArray().reverse();
 						var last = (aMarkers.length >= MAX_SIZE_TWEETS_MODAL ) ? MAX_SIZE_TWEETS_MODAL : aMarkers.length - 1;
@@ -127,7 +143,7 @@ App.IndexController = Ember.ObjectController.extend({
 						$("#myModal .modal-body #media-container .media-list").html("");
 						aMarkers.forEach(function(item) {
 							if (item != marker) {
-								$("#myModal .modal-body #media-container .media-list").append(item.text);
+								$("#myModal .modal-body #media-container .media-list").append(message(item.tweet));
 							}
 
 						});
