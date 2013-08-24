@@ -145,15 +145,14 @@
 				<h3 id="myModalLabel">Ambicities</h3>
 			</div>
 			<div class="modal-body">
-				<div class="selectedTweet"> 
-					<ul class="media-list">
-					</ul>	
+				<div class="selectedTweet">
+					<ul class="media-list"></ul>
 				</div>
 				<h5>What's happening in your city? </h5>
 				<div id="media-container"class="media">
 					<ul class="media-list">
-					Loading Tweets ...			
-					<ul>		
+						Loading Tweets ...
+						<ul>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -173,8 +172,18 @@
 			markersBinding="markers"
 			pathsBinding="paths" }}
 		</script>
+		<script type="text/x-handlebars" data-template-name="list">
+			<ul class="unstyled timeline">
+				{{#each tweets}}
+			{{event Dashboard.EventView eventBinding="this"}}
+			{{else}}
+			loading latest Tweets ...
+				{{/each}}
+			</ul>
+		</script>
 		<!--Library -->
 		<script src="js/libs/jquery-1.9.1.js"></script>
+		<script src="js/libs/moment.js"></script>
 		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 		<script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
 		<script src="js/libs/ember-1.0.0-rc.5.js"></script>

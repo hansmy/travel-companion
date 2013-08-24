@@ -7,7 +7,27 @@ html, body {
 	padding-left: 0;
 	min-width: 325px;
 }
+.leaflet-popup-content-wrapper {
+}
 
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+}
+
+.leaflet-popup-tip-container {
+}
+.container-popup{
+	width: 90%;
+}
+#text-popup{
+	margin: 1px 0 0 0;
+	
+}
+.timestamp{
+	top:1px;
+}
+.modal-popup{
+	
+}
 .ember-leaflet {
 	height: 100%;
 	width: 100%;

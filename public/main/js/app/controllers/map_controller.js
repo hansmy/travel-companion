@@ -46,22 +46,45 @@ App.IndexController = Ember.ObjectController.extend({
 						return t + encodeURI(m1) + '" target="_blank">' + m + '</a>';
 					});
 				}
+				var messagePopup = function(tweet) {
+					var timeAgo = new Date(tweet.created_at);
+					var timestamp = moment(timeAgo).fromNow();
+					var str = "<div class='container-popup' >"
+					str += "<span class='tweet'" + "><img style='float: left' src='" + tweet.user.profile_image_url_https;
+					str += "' />" + "<b>" + tweet.user.screen_name + "</b><br/><a href ='http://twitter.com/";
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a><br/> " + "</span>";
+					str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
+					str = "<div class='row' ><div class='container-popup' >"
+					str += " <li class='media tweet'>";
+					str += "<a class='pull-left' href=''http://twitter.com/" + tweet.user.screen_name + "'>";
+					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
+					str += "</a>" + "<div class='media-body'>";
+					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a> </span>";
+					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span>";
+					str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
+					str += "</div>";
+					str += "</div>"
+					str += "<span class='pull-right'><a class='openModal'> List</a></span>";
+
+					str += "</div>"
+					//closing the media-body
+					str += "</li>"
+					return str;
+				};
 				var message = function() {
-					var str = "<span class='.tweet'" + "><img style='float: left' src='" + twt.user.profile_image_url_https;
-					str += "' />" + "<b>" + twt.user.screen_name + "</b><br/><a href ='http://twitter.com/";
-					str += twt.user.screen_name + "'>@" + twt.user.screen_name + "</a><br/> " + "</span>";
-					str += "<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
 					//Bootstrap Format
-					str=" <li class='media'>";
-					str+="<a class='pull-left' href=''http://twitter.com/"+ twt.user.screen_name +"'>";
-					str+="<img class='media-object' src='"+twt.user.profile_image_url_https+"'>";
-					str+="</a>"+"<div class='media-body'>";
-					str+="<span class='media-heading'> <strong> "+twt.user.name +"</strong> "+"<a href ='http://twitter.com/";
-					str+= twt.user.screen_name + "'>@" + twt.user.screen_name + "</a> </span>";
-				    str+="<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
-					str+="</div>";//closing the media-body
-					str+="</li>"
-					
+					str = " <li class='media tweet'>";
+					str += "<a class='pull-left' href=''http://twitter.com/" + twt.user.screen_name + "'>";
+					str += "<img class='media-object' src='" + twt.user.profile_image_url_https + "'>";
+					str += "</a>" + "<div class='media-body'>";
+					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
+					str += twt.user.screen_name + "'>@" + twt.user.screen_name + "</a> </span>";
+					str += "<p>" + addHashTags(addLinksTwitter(twt.text)) + "</p>";
+					str += "</div>";
+					//closing the media-body
+					str += "</li>"
+
 					return str;
 				}
 				var marker = App.Twitter.create({
@@ -70,6 +93,8 @@ App.IndexController = Ember.ObjectController.extend({
 						lng : geo[1]
 					},
 					text : message(),
+					tweet :twt,
+					textpopup : "<ul class='media-list'>" + messagePopup(twt) + "</ul>",
 					name : "Tweet"
 				});
 				if (this._lastTweet != null) {
@@ -81,30 +106,40 @@ App.IndexController = Ember.ObjectController.extend({
 				this._lastTweet = marker;
 				var real = marker.get('marker');
 				var that = this;
-				real.on('click', function(e) {
+				//
+				real.on('click', function() {
+					var twt=marker.get('tweet');
+					var textpopup = "<ul class='media-list'>" + messagePopup(twt) + "</ul>";
+					marker.set('textpopup',textpopup);
+					
+					
+					$('.openModal').click('click', function(e) {
 
-					var title = marker.name;
+						var title = marker.name;
 
-					var text = marker.text;
-					$("#myModal .modal-body .selectedTweet .media-list").html(text);
-					/*The latest tweets on the map*/
-					var aMarkers = that.get('markers').toArray().reverse();
-					var last = (aMarkers.length >= MAX_SIZE_TWEETS_MODAL ) ? MAX_SIZE_TWEETS_MODAL : aMarkers.length - 1;
-					//Maximum Size
-					aMarkers = aMarkers.slice(0, last);
-					$("#myModal .modal-body #media-container .media-list").html("");
-					aMarkers.forEach(function(item) {
-						if (item != marker) {
-							$("#myModal .modal-body #media-container .media-list").append(item.text);
-						}
+						var text = marker.text;
+						$("#myModal .modal-body .selectedTweet .media-list").html(text);
+						/*The latest tweets on the map*/
+						var aMarkers = that.get('markers').toArray().reverse();
+						var last = (aMarkers.length >= MAX_SIZE_TWEETS_MODAL ) ? MAX_SIZE_TWEETS_MODAL : aMarkers.length - 1;
+						//Maximum Size
+						aMarkers = aMarkers.slice(0, last);
+						$("#myModal .modal-body #media-container .media-list").html("");
+						aMarkers.forEach(function(item) {
+							if (item != marker) {
+								$("#myModal .modal-body #media-container .media-list").append(item.text);
+							}
 
-					});
+						});
 
-					$('#myModal').modal({
-						keyboard : false
+						$('#myModal').modal({
+							keyboard : false
+						});
+
 					});
 
 				});
+
 				this.get('markers').pushObject(marker);
 				this._idCache[id] = twt.id;
 			}
