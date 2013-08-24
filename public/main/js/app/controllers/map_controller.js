@@ -47,19 +47,17 @@ App.IndexController = Ember.ObjectController.extend({
 					});
 				}
 				var messagePopup = function(tweet) {
-					/*moment.fn.fromNowOrNow = function(a) {
-						if (Math.abs(moment().diff(this)) < 25000) {// 25 seconds before or after now
+					moment.fn.fromNowOrNow = function(a) {
+						if (Math.abs(moment().diff(this)) < 10000) {// 25 seconds before or after now
+							var m=moment(Math.abs(moment().diff(this))).twitter();
 							return 'just now';
 						}
 						return this.fromNow(a);
-					}*/
+					}
 					
 					var timeAgo = moment(new Date(tweet.created_at));
-					var timeNow = moment(new Date().now);
-					
-				
-					var dif=moment().diff(timeAgo);
-					var timestamp=timeAgo.from(timeNow);
+					//var dif=moment().diff(timeAgo);
+					var timestamp=timeAgo.fromNowOrNow(true);
 				
 					var str = "<div class='container-popup' >"
 					str += "<span class='tweet'" + "><img style='float: left' src='" + tweet.user.profile_image_url_https;
@@ -71,13 +69,14 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "<a class='pull-left' href=''http://twitter.com/" + tweet.user.screen_name + "'>";
 					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
+					str += "<table class='media-heading'><tr><td>";
 					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
-					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>";
-					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span> </span>";
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>"+"</span></td><td>";
+					str += "<span class='timestamp pull-right'><a class='date_created' href ='http://twitter.com/"+tweet.user.screen_name + "'> <p class='muted'>"+ timestamp + "</p></a></span> </td></tr></table>";
 					str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += "</div>";
 					str += "</div>"
-					str += "<span class='pull-right'><a class='openModal'> List</a></span>";
+					str += "<span class='pull-right'><a class='openModal' href='#'> List</a></span>";
 
 					str += "</div>"
 					//closing the media-body
