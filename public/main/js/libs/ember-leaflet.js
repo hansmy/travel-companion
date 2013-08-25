@@ -197,7 +197,7 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
 	 * Override as a computed property to define the icon based on custom logic.
 	 */
 	icon : new L.Icon.Default(),
-	
+
 	iconChanged : function() {
 		var marker = this.get('marker');
 		var icon = this.get('icon');
@@ -292,10 +292,10 @@ Ember.LeafletView = Ember.View.extend({
 	locate : false,
 	panOnLocate : true,
 	//default center
-	//
+	//3.420744, -76.521431 cali
 	center : Ember.Object.create({
-		lat : 3.420744,//51.505,
-		lng : -76.521431//-0.09
+		lat : 51.505,
+		lng : -0.09
 	}),
 	centerDidChange : function() {
 		var center = this.get('center');
@@ -424,8 +424,8 @@ Ember.LeafletView = Ember.View.extend({
 	createMap : function() {
 		var zoomLevel = this.get('zoomLevel');
 		var center = this.get('center');
-		
-		var latln =[3.420744, -76.521431];
+
+		var latln = [center.get('lat'), center.get('lng')];
 		var map = L.map(this.$().get(0), {
 			zoomControl : false
 		}).setView(latln, zoomLevel);
