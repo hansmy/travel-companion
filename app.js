@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-/*
+
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -58,10 +58,10 @@ twit = new twitter({
 });
 /***************************************************/
 //51.527264,  -0.10247
-twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
-//twit.stream('statuses/filter', {
-	//'locations' :'51.527264,  -0.10247' //'-0.1125,51.5071,-0.0923,51.5473'
-//}, function(stream) {
+//twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+twit.stream('statuses/filter', {
+	'locations' :'-0.1125,51.5071,-0.0923,51.5473'
+}, function(stream) {
 
 	//twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
 	stream.on('data', function(data) {
