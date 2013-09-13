@@ -66,11 +66,11 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += " <li class='media tweet'>";
 					str = "<div class='row' ><div class='span3' >"
-					str += "<a class='pull-left' href=''http://twitter.com/" + tweet.user.screen_name + "'>";
+					str += "<a class='pull-left' href='http://twitter.com/" + tweet.user.screen_name + "'>";
 					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
 					str += "<table class='media-heading'><tr><td>";
-					str += "<span class='media-heading'> <strong> " + twt.user.name + "</strong> " + "<a href ='http://twitter.com/";
+					str += "<span class='media-heading'> <strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
 					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>"+"</span></td><td>";
 					str += "<span class='timestamp pull-right'><a class='date_created' href ='http://twitter.com/"+tweet.user.screen_name + "'> <p class='muted'>"+ timestamp + "</p></a></span> </td></tr></table>";
 					str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
@@ -94,7 +94,7 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
 					str += "<span class='media-heading'> <strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
-					str += tweet.user.screen_name + "'>@" + twt.user.screen_name + "</a>" ;
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>" ;
 					str += "<span class='timestamp pull-right'><a class='date_created'>" + timestamp + "</a></span> </span>";
 					str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 					str += "</div>";
