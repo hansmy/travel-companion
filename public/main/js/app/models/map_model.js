@@ -5,13 +5,13 @@
  */
 App.Twitter = Ember.Object.extend(Ember.LeafletMarkerMixin, {
 	highlight : false,
-	draggable : true,
+	draggable : false,
 	title : 'name',
 	popupBinding : 'textpopup',
 	// Default normal icon
 	normalIcon : L.AwesomeMarkers.icon({
 		icon : 'twitter',
-		color : 'red'
+		color : 'blue'
 	}),
 	// Default highlight icon
 	highlightIcon : L.AwesomeMarkers.icon({

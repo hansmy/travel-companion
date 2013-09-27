@@ -331,7 +331,7 @@ Ember.LeafletView = Ember.View.extend({
 		if (addCount > 0) {
 			var leafletMarkers = this.get('leafletMarkers');
 			var map = this.get('map');
-
+			if(map!=null){
 			var addedObjects = array.slice(start, start + addCount);
 			addedObjects.forEach(function(object, index) {
 				var marker = object.get('marker');
@@ -342,6 +342,7 @@ Ember.LeafletView = Ember.View.extend({
 				leafletMarkers.set(object, marker);
 
 			}, this);
+			}
 		}
 	},
 	paths : Ember.A(),
