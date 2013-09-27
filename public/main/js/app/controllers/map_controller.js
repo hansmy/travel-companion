@@ -1,6 +1,6 @@
 // Example Controller
 var MAX_SIZE_TWEETS_MODAL = 20;
-App.IndexController = Ember.ObjectController.extend({
+App.MapController = Ember.ObjectController.extend({
 	zoom : 12,
 	_idCache : {},
 	_lastTweet : null,
@@ -69,11 +69,12 @@ App.IndexController = Ember.ObjectController.extend({
 					str += "<a class='pull-left' href='http://twitter.com/" + tweet.user.screen_name + "'>";
 					str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
 					str += "</a>" + "<div class='media-body'>";
-					str += "<table class='media-heading'><tr><td>";
-					str += "<span class='media-heading'> <strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
-					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>"+"</span></td><td>";
-					str += "<span class='timestamp pull-right'><a class='date_created' href ='http://twitter.com/"+tweet.user.screen_name + "'> <p class='muted'>"+ timestamp + "</p></a></span> </td></tr></table>";
+					str += "<table class='' ><tr><td>";
+					str += "<strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
+					str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>"+"</td><td>";
+					str += "<span class='timestamp '><a class='date_created' href ='http://twitter.com/"+tweet.user.screen_name + "'> <p class='muted'>"+ timestamp + "</p></a></span> </td></tr><tr><td>";
 					str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
+					str +="</tr></td></table>"
 					str += "</div>";
 					str += "</div>"
 					str += "<span class='pull-right'><a class='openModal' href='#'> List</a></span>";

@@ -253,6 +253,7 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
 		if (popup) {
 			//marker.closePopup();
 			marker.bindPopup(popup);
+			marker.openPopup();
 		}
 	}.observes('popup', 'marker')
 });

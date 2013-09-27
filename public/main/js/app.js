@@ -8,9 +8,37 @@ Ember.TextSupport.reopen({
       this.$().tooltip();
   }
 })
+Ember.Application.reopen({
+    init: function() {
+        this._super();
+
+        this.loadTemplates();
+    },
+
+    templates: [],
+
+    loadTemplates: function() {
+        var app = this,
+            templates = this.get('templates');
+
+        app.deferReadiness();
+
+        var promises = templates.map(function(name) {
+            return Ember.$.get('/templates/'+name+'.hbs').then(function(data) {
+                Ember.TEMPLATES[name] = Ember.Handlebars.compile(data);
+            });
+        });
+
+        Ember.RSVP.all(promises).then(function() {
+            app.advanceReadiness();
+        });
+    }
+});
 
 App = Ember.Application.create({
     rootElement : "#application"
+    LOG_TRANSITIONS: true,
+    templates: ['index']
 });
 
 App.Router = Ember.Router.extend({

@@ -165,6 +165,7 @@ html, body {
 .container-fluid {
 	margin: 0 auto;
 }
+
 .section {
 	background-attachment: scroll;
 	background-position: center top;
@@ -228,7 +229,15 @@ input.middleinput {
 div.input-append .active {
 	border-color: #cccccc;
 }
+/**Twitter Media Header**/
+.table-header {
+	display: block;
+	max-height:80px;
 
+}
+.table-header tr td{
+	padding: 0,0,0,0;
+}
 /**Mobile***/
 @media (max-width: 767px) {
 	html, body {

@@ -19,14 +19,14 @@
 	<body>
 		<div id="wrapper">
 
-			<!--<div id="sidebar">
+			<div id="sidebar">
 				<div class="masthead">
 					<div class="navbar">
 						<div class="navbar-inner">
 
 							<div class="container">
-								 Be sure to leave the brand out there if you want it shown -->
-								<!--<a id="btn-option" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+								<!-- Be sure to leave the brand out there if you want it shown -->
+								<a id="btn-option" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 								<a class="brand" href="#">AmbieCities</a>
 								<div id="searchbox">
 									<form class="navbar-search form-search">
@@ -57,36 +57,77 @@
 									</ul>
 
 								</div>
-								.btn-navbar is used as the toggle for collapsed navbar content -->
+								<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 
-							<!--</div>< nav-collapse-->
+							</div><!-- nav-collapse-->
 
-						<!--</div>
-					</div>< /.navbar -->
+						</div>
+					</div><!-- /.navbar -->
 
-				<!--</div>
+				</div>
 
-			</div>< /.floatbar -->
+			</div><!-- /.floatbar -->
 
-			<!--<div class="tab-content">
+			<div class="tab-content">
 				<div class="tab-pane active" id="map">
 
-					
+					<div id="application" >
+
+					</div>
 
 				</div>
 				<div class="tab-pane" id="list">
 
-					
+					<div id="banner">
+
+					</div>
+
+					<h3>List <small>Scroll, find or filter!</small></h3>
+
+					<ul class="thumbnails">
+						<li class="span4">
+							<div class="thumbnail section">
+								<img src="http://cdn.londonandpartners.com/visit/london-organisations/houses-of-parliament/63950-640x360-london-icons2-640.jpg" alt="300x200" style="">
+								<div class="caption">
+									<h3>Westmister</h3>
+									<p>
+										Ipsum ipsum ipsumi psum ipsumip sumip sumips umipsum
+										ipsum ipsumi psum ipsumip sumip.
+									</p>
+									<p>
+										<a href="#" class="btn btn-primary">Visit now!</a><a href="#"
+										class="btn">Later...</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="span4">
+							<div class="thumbnail section">
+								<img src="http://www.swiftcars.co.uk/DesktopModules/SC_ImageGallery/Data/Modules/module_524/Images/londonlight.jpg" alt="300x200" style="">
+								<div class="caption">
+									<h3>Tower of London</h3>
+									<p>
+										Ipsum ipsumi psum ipsumip sumip.
+									</p>
+									<p>
+										<a href="#" class="btn btn-primary">Visit Now!</a><a href="#"
+										class="btn">Later...</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="span4">
+							...
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="tab-pane" id="tab3">
 				<p>
 					I'm in section C.
 				</p>
 			</div>
-			-->
-			<div id="application" >
 
-			</div>
 			<div class="footer">
 				<p>
 					&copy; Ambiesense
@@ -125,7 +166,7 @@
 			</div>
 		</div>
 		<!-- /Modal 
-		<script type="text/x-handlebars" data-template-name="index">
+	<!--	<script type="text/x-handlebars" data-template-name="index">
 			{{view Ember.LeafletView
 			zoomLevelBinding="zoom"
 			centerBinding="center"
@@ -133,7 +174,6 @@
 			pathsBinding="paths" }}
 		</script>
 		-->
-		<!--
 		<script type="text/x-handlebars" data-template-name="list">
 			<ul class="unstyled timeline">
 				{{#each tweets}}
@@ -143,7 +183,6 @@
 				{{/each}}
 			</ul>
 		</script>
-		-->
 		<!--Library -->
 		<script src="js/libs/jquery-1.9.1.js"></script>
 		<script src="js/libs/moment.min.js"></script>
@@ -158,17 +197,9 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<!--Application -->
 		<script src="js/app/app.js" type="text/javascript" charset="utf-8"></script>
-		<!-- Models -->
 		<script src="js/app/models/map_model.js" type="text/javascript" charset="utf-8"></script>
-		<!-- Controllers -->
-		<script src="js/app/controllers/application_controller.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/controllers/map_controller.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/app/controllers/list_controller.js" type="text/javascript" charset="utf-8"></script>
-		<!-- Views -->
-		<script src="js/app/views/application_view.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/app/views/tabs_view.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/app/views/map_view.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/app/views/list_view.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/app/views/map_views.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/router.js" type="text/javascript" charset="utf-8"></script>
 
 	</body>

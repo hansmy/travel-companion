@@ -37,13 +37,13 @@ Ember.Application.reopen({
 App = Ember.Application.create({
 	rootElement : "#application",
 	LOG_TRANSITIONS: true,
-    templates: ['application','map','list','tabs'],
+    templates: ['index'],
 	ready : function() {
 		var socket = io.connect();
 		var controller;
 		socket.on('tweet', function(json) {
 			if (json.geo) {
-				var index=App.__container__.lookup('controller:map');
+				var index=App.__container__.lookup('controller:index');
 				index.addTweet(json);
 			}
 
