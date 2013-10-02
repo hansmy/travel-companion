@@ -2,6 +2,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 	results:Ember.A(),
 	_idCache : {},
 	_lastTweet : null,
+	_counter:0,
 	addTweet : function(twt) {
 		var id = twt.id;
 		var geo = twt.geo.coordinates;
@@ -87,7 +88,8 @@ App.ApplicationController = Ember.ObjectController.extend({
 					text : message(twt),
 					tweet : twt,
 					textpopup : "<ul class='media-list'>" + messagePopup(twt) + "</ul>",
-					name : "Tweet"
+					name : "Tweet",
+					timestamp: twt.created_at
 				});
 
 

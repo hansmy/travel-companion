@@ -4,8 +4,20 @@
 
 					</div>
 
-					<h3>List <small>Scroll, find or filter!</small></h3>
+<h3>List <small>Scroll, find or filter!</small></h3>
+<ul class="thumbnails">
 
+  {{#each content in reverse}}
+  	<li class="span3"> 
+		 {{view App.TweetView contentBinding="content"}}
+	</li>	
+
+  {{!  {{content.tweet.from_user}}{{!</strong></a> {{}}
+  {{else}}
+    loading latest Tweets ...
+  {{/each}}
+</ul>
+{{!
 					<ul class="thumbnails">
 						<li class="span4">
 							<div class="thumbnail section">
@@ -42,5 +54,6 @@
 							...
 						</li>
 					</ul>
+					}}
 				</div>
 </div>

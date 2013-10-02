@@ -38,7 +38,7 @@ App = Ember.Application.create({
 	rootElement : "#application",
 	LOG_BINDINGS: true,
 	LOG_TRANSITIONS: true,
-    templates: ['application','map','list','tabs'],
+    templates: ['application','map','list','tabs','tweet'],
 	ready : function() {
 		var socket = io.connect();
 		var controller;
