@@ -20,6 +20,12 @@ App.TweetView = Ember.View.extend({
 		var tweet =this.get('content.tweet');
    		var profile_image = tweet.user.profile_image_url_https;
    		return profile_image;
+   }.property(),
+   tweetText: function() {
+		var tweet =this.get('content.tweet');
+   		var text = tweet.text;
+   		return text;
    }.property()
+
 
 });

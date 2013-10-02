@@ -1,3 +1,11 @@
+Ember.Handlebars.helper('parseTweet',
+function(text) {
+    if(text==null|| text== undefined){
+        text="";
+    }
+    var parsed = twttr.txt.autoLink(text);
+    return new Handlebars.SafeString(parsed);
+    });
 
 /*
 Ember.Handlebars.registerHelper('parseTweet',
