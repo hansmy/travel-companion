@@ -1,0 +1,11 @@
+
+		<a {{bindAttr href="view.tweetUrl"}} class="pull-left"> 
+			 	<img class="media-object" {{bindAttr src="view.tweetProfileImage"}}>
+			
+		</a>
+		<div class="media-body">
+			<span class="media-heading"> <strong> {{content.tweet.user.screen_name}}</strong> 
+				<a href ="http://twitter.com/ {{content.tweet.user.screen_name}}">@ {{content.tweet.user.screen_name}}  </a>
+			</span> ;
+		<p>  {{content.tweet.text}} + </p>
+		</div>
