@@ -1,50 +1,58 @@
 
-<div id="sidebar">
-				<div class="masthead">
-					<div class="navbar">
-						<div class="navbar-inner">
-
-							<div class="container">
-								<!-- Be sure to leave the brand out there if you want it shown -->
-								<a id="btn-option" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-								<a class="brand" href="#">AmbieCities</a>
-								<div id="searchbox">
-									<form class="navbar-search form-search">
-										<div class="input-append">
-											<input type="text" class="span4 search-query" placeholder="What's happening around you?">
-											<button type="submit" class="btn">
-												<i class="icon-search"></i>
-											</button>
-										</div>
-
-									</form>
-								</div>
-								<div class="nav-collapse collapse">
-									<ul class="nav nav-pills pull-right">
-
-										<li class="active">
-											<a {{action goToMap}} data-toggle="tab">Map</a>
-										</li>
-
-										<li>
-										    <a {{action goToList}} data-toggle="tab">List</a>
-											
-										</li>
-
-										<li>
-											<a href="#my_location"><i class="icon-globe"></i></a>
-										</li>
-
-									</ul>
-
-								</div>
-								<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-
-							</div><!-- nav-collapse-->
-
-						</div>
-					</div><!-- /.navbar -->
-
-				</div>
 
 
+<header>
+		
+		<!--start: Container -->
+		<div class="container">
+			
+			<!--start: Navigation -->
+			<div class="navbar navbar-inverse">
+	    		<div class="navbar-inner">
+			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			          		</a>
+							<a class="brand" href="index.html">AmbieCities</a>
+					
+							<div class="nav-collapse collapse">
+											<ul class="nav nav-pills pull-right">
+
+												<li class="active">
+													<a {{action goToMap}} data-toggle="tab">Map</a>
+												</li>
+
+												<li>
+												    <a {{action goToList}} data-toggle="tab">List</a>
+													
+												</li>
+
+												<li>
+													<a href="#my_location"><i class="icon-globe"></i></a>
+												</li>
+
+											</ul>
+							
+
+							</div>
+							<form id="custom-search-form" class="navbar-form form-search form-horizontal pull-right">
+		    					<div class="input-append">
+		     					   <input type="text" class="span3 search-query" placeholder="What's happening around you?">
+		     					   <button type="submit" class="btn"><i class="icon-search"> Search</i></button>
+		   						 </div>
+							</form>	
+							<div>
+						
+							</div>
+							
+	          	</div>
+	        </div>
+	      		
+			<!--end: Navigation -->
+			
+		</div>
+		<!--end: Container-->			
+			
+	</header>
+<!--end: Header-->

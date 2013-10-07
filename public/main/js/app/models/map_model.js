@@ -10,7 +10,7 @@ App.Twitter = Ember.Object.extend(Ember.LeafletMarkerMixin, {
 	popupBinding : 'textpopup',
 	// Default normal icon
 	normalIcon : L.AwesomeMarkers.icon({
-		icon : 'twitter',
+		icon : 'icon-twitter',
 		color : 'blue'
 	}),
 	// Default highlight icon

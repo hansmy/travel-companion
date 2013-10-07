@@ -96,7 +96,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 				if (this._lastTweet != null) {
 
 					this._lastTweet.set('icon', L.AwesomeMarkers.icon({
-						icon : 'twitter',
+						icon : 'icon-twitter',
 						color : 'blue'
 					}));
 				}
@@ -141,7 +141,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 				this.get('results').pushObject(marker);
 				//first marker is red
 				marker.set('icon', L.AwesomeMarkers.icon({
-						icon : 'twitter',
+						icon : 'icon-twitter',
 						color : 'red'
 					}));
 				

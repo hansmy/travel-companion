@@ -1,0 +1,416 @@
+/* Put your CSS here */
+html, body {
+	margin: 0;
+	height: 100%;
+	margin: 0;
+	padding-left: 0;
+	padding-left: 0;
+	min-width: 325px;
+}
+.leaflet-popup-content-wrapper {
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+}
+
+.leaflet-popup-tip-container {
+}
+.container-popup{
+	width: 90%;
+}
+#text-popup{
+	margin: 1px 0 0 0;
+	
+}
+.timestamp{
+	top:1px;
+}
+.modal-popup{
+	
+}
+.ember-leaflet {
+	height: 100%;
+	width: 100%;
+}
+.ember-application {
+	height: 100%;
+	width: 100%;
+}
+.ember-view {
+	height: 100%;
+	width: 100%;
+}
+
+/*Navbar*/
+#wrapper {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#sidebar {
+	/*background-color: #9A0058/*#671E79;/*#16a085*/;
+	height: 50px;
+	padding: 0;
+	position: fixed;
+	left: 5%;
+	right: 5%;
+	top: 2%;
+	width: 90%;
+	z-index: 2;
+}
+#banner {
+	height: 55px;
+	width: 98.0%;
+	position: fixed;
+	left: 0%;
+	right: 0%;
+	top: 0%;
+	z-index: 1;
+	background: #FFFFFF;
+}
+#list {
+	margin-top: 80px;
+	padding-left: 5%;
+	padding-right: 5%;
+	width: 90%;
+}
+#nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	z-index: 2;
+}
+
+#nav ul li {
+	color: #F1F1F1;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 22px;
+	filter: alpha(opacity=40);
+	font-size: 16px;
+	font-size: 1.6 rem;
+	font-style: normal;
+	font-weight: 100;
+	opacity: .4;
+	padding: 8px 0 8px 15px;
+	text-transform: uppercase;
+	width: 70%;
+	z-index: 2
+}
+
+#nav ul li.active {
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+#nav ul li.last {
+	padding-right: 0px;
+}
+
+#nav li span {
+	display: inline-block;
+	font-size: 14px;
+	font-size: 1.4 rem;
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+	padding-left: 10px;
+	width: 0;
+	z-index: 2
+}
+
+.btn-navbar {
+	cursor: pointer;
+	filter: alpha(opacity=40);
+	float: left;
+	margin: 20px 5px 10px;
+	opacity: .4;
+	padding: 7px 10px;
+}
+
+.btn-navbar .icon-bar {
+	background-color: #F5F5F5;
+	border-radius: 1px 1px 1px 1px;
+	box-shadow: none;
+	display: block;
+	height: 2px;
+	width: 18px;
+}
+/* Custom container */
+.container {
+	margin: 0 auto;
+}
+.container > hr {
+	margin: 60px 0;
+}
+#container {
+
+	backface-visibility: hidden;
+	position: relative;
+	transform: translate3d(0px, 0px, 0px);
+	transition: transform 500ms ease 0s;
+	width: 100%;
+	height: 100%;
+}
+.selectedTweet{
+	background-color: 'blue';
+	padding: 1px, 1px, 1px, 2px;
+}
+.thumbnails {
+	width: 90%;
+}
+/**Section */
+.container-fluid {
+	margin: 0 auto;
+}
+
+.section {
+	background-attachment: scroll;
+	background-position: center top;
+	position: relative;
+}
+.tab-pane {
+	width: 100%;
+	height: 100%;
+}
+.tab-content {
+	width: 100%;
+	height: 100%;
+}
+/*List */
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	margin: 80px 0;
+	text-align: center;
+}
+.jumbotron h1 {
+	font-size: 100px;
+	line-height: 1;
+}
+.jumbotron .lead {
+	font-size: 24px;
+	line-height: 1.25;
+}
+.jumbotron .btn {
+	font-size: 21px;
+	padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+	margin: 60px 0;
+}
+.marketing p + h4 {
+	margin-top: 28px;
+}
+
+/* Customize the navbar links to be fill the entire space of the .navbar */
+
+#coordN {
+	border-radius: 0 0 0 0;
+}
+#coordW {
+	border-radius: 0 0 0 0;
+	border-top: none;
+}
+
+input.middleinput {
+	border-radius: 0 0 0 0;
+	border-left: none;
+}
+
+.middle {
+	border-radius: 0 0 0 0 !important;
+}
+
+div.input-append .active {
+	border-color: #cccccc;
+}
+/**Twitter Media Header**/
+.table-header {
+	display: block;
+	max-height:80px;
+
+}
+.table-header tr td{
+	padding: 0,0,0,0;
+}
+/**Mobile***/
+@media (max-width: 767px) {
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.tab-content {
+		height: 100%;
+		width: 100%;
+	}
+	.tab-pane {
+		height: 100%;
+		width: 100%;
+	}
+	#banner {
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		width: 96%;
+	}
+	#list-container {
+		padding-left: 2px;
+		padding-right: 2px;
+		width: 90%;
+	}
+	.thumbnails {
+		padding-left: 5%;
+		padding-right: 5%;
+		right: 5%;
+		left: 5%;
+		width: 90%;
+	}
+}
+@media screen and (max-width: 600px) {
+	/*General*/
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding-left: 0;
+		padding-left: 0;
+	}
+	/*Menu*/
+
+	#banner {
+		height: 90px;
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		width: 95%;
+	}
+
+	/*Container*/
+	.thumbnails {
+		padding-left: 5%;
+		padding-right: 5%;
+		right: 5%;
+		left: 5%;
+		width: 90%;
+	}
+	.navbar .container{
+		padding-bottom: 10px;
+	}
+	
+}
+@media screen and (max-width: 350px) {
+	
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding-left: 0;
+		padding-left: 0;
+		min-width: 250px;
+	}
+
+	#sidebar {
+		/*background-color: #9A0058/*#671E79;/*#16a085*/;
+		height: 20px;
+		max-height: 25px;
+		left: 8%;
+		right: 8%;
+		top: 1%;
+		width: 84%;
+		min-width: 250px;
+	}
+
+	#banner {
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		width: 94%;
+	}
+	.navbar-search{
+		margin-top: 1px;
+	}
+	.form-search{
+		margin-right: 0;
+	}
+	.navbar .container{
+		padding-bottom: 3px;
+	}
+	#btn-option{
+		padding: 1px 1px 1px 1px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding-left: 0;
+		padding-left: 0;
+	}
+	#sidebar {
+		/*background-color: #9A0058/*#671E79;/*#16a085*/;
+		height: 20px;
+		max-height: 25px;
+		left: 8%;
+		right: 8%;
+		top: 1%;
+		width: 84%;
+	}
+	#banner {
+		left: 0%;
+		right: 0%;
+		top: 0%;
+		width: 94%;
+	}
+	#nav ul li {
+		color: #F1F1F1;
+		cursor: pointer;
+		display: inline-block;
+		line-height: 15px;
+		filter: alpha(opacity=40);
+		font-size: 13px;
+		font-size: 1.6 rem;
+		font-style: normal;
+		font-weight: 100;
+		opacity: .4;
+		padding: 3px 0 3px 7px;
+		text-transform: uppercase;
+		width: 60%;
+	}
+	.navbar .brand {
+		padding: 5px 0 0 5px;
+	}
+	#nav ul li.active {
+		filter: alpha(opacity=100);
+		opacity: 1;
+	}
+
+	#nav ul li.last {
+		padding-right: 0px;
+	}
+
+	#nav li span {
+		display: inline-block;
+		font-size: 10px;
+		font-size: 1.4 rem;
+		height: 0;
+		opacity: 0;
+		overflow: hidden;
+		padding-left: 5px;
+		width: 0;
+	}
+
+}
