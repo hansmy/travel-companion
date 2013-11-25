@@ -6,15 +6,36 @@
 
 <!--start: Container -->
 	<div class="container">
-				
+	<!-- start: Page Title -->
+		<div id="page-title">
+
+			<h2>Portfolio</h2>
+
+		</div>
+		<!-- end: Page Title -->
+	
 		<!--start: Wrapper-->
 		<div id="wrapper">
-		
+			
+			<div id="filters">
+				<ul class="option-set" data-option-key="filter">
+					<li><a href="#filter" class="selected" data-option-value="*">All</a></li>
+					<li>/</li>
+					<li><a href="#filter" data-option-value=".nature">Nature</a></li>
+					<li>/</li>
+					<li><a href="#filter" data-option-value=".people">People</a></li>
+					<li>/</li>
+					<li><a href="#filter" data-option-value=".scenery">Scenery</a></li>
+					<li>/</li>
+					<li><a href="#filter" data-option-value=".world">World</a></li>
+				</ul>
+			</div>
+				
+				
 			<!-- start: Wall -->
 			<div id="wall" class="row-fluid">
 
-				<h3>List <small>Scroll, find or filter!</small></h3>
-				
+							
 
 
 				  {{#each content in reverse}}
