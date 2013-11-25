@@ -1,6 +1,8 @@
 App.TweetView = Ember.View.extend({
     tagName: 'div',
-    classNames: ['thumbnail section'],
+    classNames: ['item thumbnail section'],
+    //thumbnail section
+    //span3 item world scenery isotope-item
    // classNameBindings: 'isSelected',
     templateName: 'tweet',
 
