@@ -1662,7 +1662,8 @@ input[type="button"] {
 
 .tab-content {
 	/*padding: 20px;*/
-	position: fixed;
+	/*position: fixed;*/
+	position:relative
 	z-index: 3;
 	background: #fff;
 	-webkit-border-radius: 0px 0px 2px 2px;
