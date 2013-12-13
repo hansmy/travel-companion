@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-/*
+
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -81,6 +81,94 @@ app.get('/api/search/:query', function(req, res) {
 			res.jsonp(data);
 
 		});
+	}
+});
+
+var data={
+  "1": {
+    "first_name": "Jon",
+    "last_name": "Snow",
+    "email": "jon.snow@got.com",
+    "password": "67f128a9012553cc2132747e83fe08d749d6bacfd313207d9f1be3fb0e1b62804c5477a84711926b672bd912bfec3c9e41ce89e6060aaea6b20b734036a8962e",
+    "id": "1"
+  },
+  "2": {
+    "first_name": "Arya",
+    "last_name": "Stark",
+    "email": "arya.stark@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 2
+  },
+  "3": {
+    "first_name": "Sansa",
+    "last_name": "Stark",
+    "email": "sansa.stark@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 3
+  },
+  "4": {
+    "first_name": "Catelyn",
+    "last_name": "Stark",
+    "email": "catelyn.stark@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 4
+  },
+  "5": {
+    "first_name": "Eddard",
+    "last_name": "Stark",
+    "email": "eddard.stark@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 5
+  },
+  "6": {
+    "first_name": "Tyrion",
+    "last_name": "Lannister",
+    "email": "tyrion.lannister@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 6
+  },
+  "7": {
+    "first_name": "Jaime",
+    "last_name": "Lannister",
+    "email": "jaime.lannister@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 7
+  },
+  "8": {
+    "first_name": "Peter",
+    "last_name": "Baelish",
+    "email": "petyr.baelish@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 8
+  },
+  "9": {
+    "first_name": "Jorah",
+    "last_name": "Mormont",
+    "email": "jorah.mormont@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 9
+  },
+  "10": {
+    "first_name": "Robb",
+    "last_name": "Stark",
+    "email": "robb.stark@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 10
+  },
+  "11": {
+    "first_name": "Tywin",
+    "last_name": "Lannister",
+    "email": "tywin.lannister@got.com",
+    "password": "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f",
+    "id": 11
+  },
+  "key": 12
+}
+
+app.get('/api/autocomplete/:query', function(req, res) {
+	//console.log(req);
+		res.json(data);
+		
 	}
 });
 //app.get('/api/search', api.search);
