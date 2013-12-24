@@ -36,7 +36,7 @@
 
 				this.typeahead = this.$().typeahead({
 					name : "typeahead",
-					limit : this.get("limit") || 5,
+					limit : this.get("limit") || 10,
 					local : data.map(function(item) {
 						console.log(item);
 
@@ -61,20 +61,22 @@
                 //create an ember objectitem
 								var objEmber = Ember.Object.create(item);
                 // 
-                var displayName= objEmber.get(_this.get("name"));
 
-                var arrayWord=displayName.split(',');
-
+                //var regExMatch = new RegEx( '^' , displayName,'i');
+                var value= objEmber.get(_this.get("name"));
+                var name=value;
+                var arrayWord=value.split(',');
+                
 								return {
-									value : arrayWord[0],
-                  name : objEmber.get(_this.get("name")),
-                  tokens : [objEmber.get(_this.get("name"))],
+									value : value,
+                  name : name,
+                  tokens : arrayWord,
 									emberObject : objEmber
 								};
 							});
 						}
 					},
-					template : '<strong>{{value}}</strong>',
+					template : '<p class="result-auto"><strong>{{value}}</strong> </p>',
 					engine : T
 				});
 
@@ -95,7 +97,11 @@
 			},
 
 			selectionObserver : function() {
-				return this.typeahead.val(this.get("selection").get(this.get("name")));
+        console.log(this.get("name"))
+        console.log(this.get("selection").get(this.get("name")));
+				//return this.typeahead.val(this.get("selection").get(this.get("name")));
+       //('setQuery', 'value-you-want-to-set')
+        return this.$().typeahead('setQuery', this.get("selection").get(this.get("name")));
 			}.observes("selection"),
 		
 
