@@ -41,6 +41,8 @@ App = Ember.Application.create({
     templates: ['index']
 });
 
+
+
 App.Router = Ember.Router.extend({
     location : Ember.Location.create({
         implementation : 'none'

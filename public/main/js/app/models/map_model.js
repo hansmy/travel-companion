@@ -49,3 +49,10 @@ App.Valve = Ember.Object.extend(Ember.LeafletCircleMixin, {
 	color : 'yellow',
 	opacity : 0.8
 });
+
+App.Autocomplete  = DS.Model.extend({
+  first_name:    DS.attr('string'),
+  last_name:     DS.attr('string'),
+  email:        DS.attr('string'),
+  password:      DS.attr('string')
+ });

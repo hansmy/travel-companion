@@ -1,11 +1,7 @@
 <div class="input-append">
-	   {{input id="search-box" type="text" class="typeahead"  value=searchText placeholder="What's happening around you? Places, Streets .."}}
+	   
+	   {{type-ahead id="search-box" value=searchText data=controller.content name="display_name" selection=myFirst placeholder="What's happening around you? Places, Streets .."}} {{myFirst.first_name}}       
 	   <div class="pull-right">
 		   <button  type="submit" class="btn"><i id="search-icon" class="icon-search"> Search</i></button>
 	   </div>
 </div>
-<ul>
-      {{#each searchResults}}
-        <li>{{this}}</li>
-      {{/each}}
-</ul>

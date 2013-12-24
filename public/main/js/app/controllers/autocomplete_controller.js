@@ -1,13 +1,35 @@
-App.AutocompleteController = Ember.Controller.extend({
-  searchText: null,
+App.AutocompleteController = Ember.ArrayController.extend({
+	searchText : null,
+	content : [],
+	init : function() {
+		this.set('content', [Ember.Object.create({
+			display_name : "Red"
+		}), Ember.Object.create({
+			display_name : "Green"
+		}), Ember.Object.create({
+			display_name : "Blue"
+		})]);
+	}
+	/*,
 
-  searchResults: function() {
-    var searchText = this.get('searchText');
-    if (!searchText) { return; }
+	 searchResults: function() {
 
-    var regex = new RegExp(searchText, 'i');
-    return ['one', 'two', 'three'].filter(function(name) {
-      return name.match(regex);
-    });
-  }.property('searchText')
+	 var searchText = this.get('searchText');
+	 if (!searchText) { return; }
+
+	 var model=this.get('model');
+	 var regExp = new RegExp(searchText, 'i');
+
+	 /*this.set('content',this.store.filter('autocomplete',function(item){
+	 var name= item.get('first_name');
+	 var response=regExp.test(name);
+	 return response;
+	 }));
+	 this.set('content',	this.store.find("autocomplete")	);
+
+	 }.observes('searchText')
+	 //  }.property('searchText')
+	 */
+
 });
+//('model.@each.color', 'daFilter')
