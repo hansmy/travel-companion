@@ -97,12 +97,10 @@
 			},
 
 			selectionObserver : function() {
-        console.log(this.get("name"))
-        console.log(this.get("selection").get(this.get("name")));
-				//return this.typeahead.val(this.get("selection").get(this.get("name")));
-       //('setQuery', 'value-you-want-to-set')
-        return this.$().typeahead('setQuery', this.get("selection").get(this.get("name")));
+       			this.sendAction('action', this.get("selection"));
+       			 return this.$().typeahead('setQuery', this.get("selection").get(this.get("name")));
 			}.observes("selection"),
+
 		
 
 		});

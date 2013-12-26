@@ -263,7 +263,7 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
  */
 Ember.LeafletView = Ember.View.extend({
 	classNames : ['ember-leaflet'],
-
+	
 	//default zoom level
 	zoomLevelValue : 13,
 	zoomLevel : function(key, value) {
@@ -306,6 +306,15 @@ Ember.LeafletView = Ember.View.extend({
 		}
 		console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
 	}.observes('center.lat', 'center.lng'),
+
+
+
+
+	myLocationDidChange:function(){
+		var map=this.get('map');
+		var map=this.get('locate');
+		 map.locate({setView: true, maxZoom: 16});
+	}.observes('locate'),
 
 	// Real markers array
 	markers : Ember.A(),

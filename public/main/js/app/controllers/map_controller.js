@@ -3,12 +3,20 @@ var MAX_SIZE_TWEETS_MODAL = 20;
 App.MapController = Ember.ObjectController.extend({
 	zoom : 12,
 	needs:'application',
+	//the location of the screen or searched place
+	location:null,
+	locationBinding:'controllers.application.location',
+	//the users current location using HTML5
+	myLocation:false,
+	myLocationBinding:'controllers.application.myLocation',
+	//Array of Markers
+	markers : Ember.A(),
 	markersBinding: 'controllers.application.results',
 	center : Ember.Object.create({
 		lat : 51.505,
 		lng : -0.09
 	}),
-	markers : Ember.A(),
+	
 	remove : function(s) {
 		this.get('markers').removeObject(s);
 	},
@@ -163,5 +171,26 @@ App.MapController = Ember.ObjectController.extend({
 			},
 			color : 'lime'
 		}));
-	}
+	},
+
+
+
+	locationDidChange: function(){
+
+			var location=this.get("location");
+			var bbox=location.get('boundingbox');
+			if(bbox){
+				var southWest = L.latLng(bbox[0], bbox[2]);
+   		 		var northEast = L.latLng(bbox[1], bbox[3]);
+   		 		var bounds = L.latLngBounds(southWest, northEast);
+   		 		var center = bounds.getCenter();
+   		 		this.set('center',Ember.Object.create(center));
+
+			}
+
+	}.observes('location'),
+	myLocationDidChange:function(){
+		var myLocation=this.get('myLocation');
+		this.set('center',myLocation);
+	}.observes('myLocation')
 });

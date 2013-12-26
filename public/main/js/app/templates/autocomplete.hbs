@@ -1,6 +1,6 @@
 <div class="input-append">
 	   
-	   {{type-ahead id="search-box" value=searchText data=controller.content name="display_name" selection=myFirst placeholder="What's happening around you? Places, Streets .."}} {{myFirst.first_name}}       
+	   {{type-ahead id="search-box" value=searchText data=controller.content name="display_name" selection=myPlace action="changedLocation" placeholder="What's happening around you? Places, Streets .."}} {{myFirst.first_name}}       
 	   <div class="pull-right">
 		   <button  type="submit" class="btn"><i id="search-icon" class="icon-search"> Search</i></button>
 	   </div>

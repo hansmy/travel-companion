@@ -9,6 +9,12 @@ App.AutocompleteController = Ember.ArrayController.extend({
 		}), Ember.Object.create({
 			display_name : "Blue"
 		})]);
+	}/*,
+	actions:{
+		changedLocation:function(newLocation){
+			console.log("Change Location Autocomplete");
+			this.set('newLocation',newLocation);
+		}
 	}
 	/*,
 

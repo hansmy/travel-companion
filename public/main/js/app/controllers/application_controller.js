@@ -1,5 +1,7 @@
 App.ApplicationController = Ember.ObjectController.extend({
 	results:Ember.A(),
+	location:null,
+	myLocation:null,
 	_idCache : {},
 	_lastTweet : null,
 	_counter:0,
@@ -148,5 +150,47 @@ App.ApplicationController = Ember.ObjectController.extend({
 			}
 		}
 
-	}
+	},
+	actions:{
+		changedLocation:function(newLocation){
+			this.set('location',newLocation);
+		},
+		locatedMe :function(){
+			this.getGeoLocation();
+			
+		}
+	},
+	coords: false,
+
+  getGeoLocation: function() {
+    if (navigator.geolocation) {
+        that=this;
+        navigator.geolocation.getCurrentPosition(
+				function(position) {
+  					var cords=position.coords;
+  					var eObject=Ember.Object.create({lat:cords.latitude, lng:cords.longitude})
+  					that.set("myLocation",eObject);    
+ 				 },
+ 				 function(error){ 	
+ 				 	console.log(error);
+ 				 },
+ 				 {
+                timeout: 2000
+            	}
+        );
+    } else {
+        this.set('geolocation', false);
+    }
+  },
+
+  locationRetrieved: function(position) {
+  	var cords=position.coords;
+  	var eObject=Ember.Object.create({lat:cords.latitude, lng:cords.longitude})
+  	this.set("myLocation",cords);    
+  },
+  locationFailed:function(error){
+  	console.log(error);
+  }
+
+
 });

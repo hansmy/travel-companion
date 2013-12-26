@@ -31,6 +31,7 @@ App.AutocompleteRoute = Em.Route.extend({
 		//return App.SearchResult.find({firstName:params.firstName,lastName:params.lastName,city:params.city})
 	},
 
+
 	setupController : function(controller, model) {
 
 		controller.set('model', model);
@@ -56,6 +57,7 @@ App.ApplicationRoute = Em.Route.extend({
 		goToList : function() {
 			this.transitionTo('list');
 		}
+		
 	}
 });
 
