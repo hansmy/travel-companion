@@ -83,14 +83,12 @@ twit.stream('statuses/filter', {
 			var results=[];
 			
 			statuses.forEach(function(tweet){
-				//console.log(tweet);
-				//console.log("******************************************************************");
-
+			
 				var geo=tweet.geo?tweet.geo:(tweet.retweeted_status?tweet.retweeted_status.geo:null);
 				console.log(geo);
 				if(!tweet.retweeted_status){
 					console.log(tweet);
-					
+
 				}
 				if (geo) {
 					results.push({

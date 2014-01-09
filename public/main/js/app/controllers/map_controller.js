@@ -190,8 +190,6 @@ App.MapController = Ember.ObjectController.extend({
    		 		var center = bounds.getCenter();
    		 		this.set('center',Ember.Object.create(center));
 
-
-
 			}
 
 
@@ -201,67 +199,20 @@ App.MapController = Ember.ObjectController.extend({
 		var myLocation=this.get('myLocation');
 		this.set('center',myLocation);
 	}.observes('myLocation'),
-	postSearch: function  () {
-		//run loop !!! Remember
+	centerChange: function  () {
 		
-		//var model=this.get('model');
 		
-		console.log("This will log often.");
-		_console=console;
-		//var search=App.debounce(
-		//	function(){
-		//Ember.run.debounce({},function(){
-			//var store=this.get('store');
-			//var center=this.get('center');
-			//_console.log("Not so often.");
-			/*
-			console.log("Not so often.");
-			console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
-			that=this;
-			store.find('result',{lat:center.lat,lng:center.lng,radio:"2km"}).then( function(results) {
-     		// do stuff with each results
-     		
-			results.forEach(function(result) {
-	            var text = result.get('text');
-	            var lng=   result.get('lng');
-	            var lat=   result.get('lat');
-	            
-
-	            var marker = App.Twitter.create({
-					location : {
-						lat : lat,
-						lng : lng
-					},
-					text : text,
-					tweet : result,
-					textpopup : "<ul class='media-list'>" +text + "</ul>",
-					name : "Tweet"//,
-					//timestamp: twt.created_at
-				});
-				//add tweet as a marker
-				
-				var markers=that.get('markers');
-				markers.pushObject(marker);
-
-			});
-            // do something with the users
-        });
-			*/    		
-		//}
-		//, 3000);
 		this.searchTerm();
 
 	}.observes('center.lat', 'center.lng'),
 	searchTerm: App.debouncePromise(function() {
     var searchController = this;
-    //this.set('count', 0);
-    console.log("Not so often.");
-    
-			var store=this.get('store');
+    		//this.set('count', 0);
+       		var store=this.get('store');
 			var center=this.get('center');
 		
 			
-			console.log("Not so often.");
+			
 			console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
 			that=this;
 			return store.find('result',{lat:center.lat,lng:center.lng,radio:"2km"}).then( function(results) {
@@ -272,7 +223,7 @@ App.MapController = Ember.ObjectController.extend({
 	            var lng=   result.get('lng');
 	            var lat=   result.get('lat');
 	            
-
+	           	//validation is not already load
 	            var marker = App.Twitter.create({
 					location : {
 						lat : lat,
