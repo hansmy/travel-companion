@@ -69,18 +69,50 @@ twit.stream('statuses/filter', {
 	});
 });
 // API
-app.get('/api/search/:query', function(req, res) {
-	var key_term = req.params.query;
-	if (key_term) {
-		console.log(key_term);
-		//console.log(twit);
-		twit.search(key_term, {}, function(err, data) {
+//http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
+
+	app.get('/api/results', function(req, res) {
+		//console.log(req.query);
+		//console.log(req);
+		
+		var geocode=req.query.lat+","+req.query.lng+","+req.query.radio;
+		console.log(geocode);
+		twit.search("", {"geocode":geocode, count:10,result_type: "recent"}, function(err, data) {
 			//res.json(data);
-			res.jsonp(data);
+			var statuses=data.statuses;
+			var results=[];
+			
+			statuses.forEach(function(tweet){
+				//console.log(tweet);
+				//console.log("******************************************************************");
+
+				var geo=tweet.geo?tweet.geo:(tweet.retweeted_status?tweet.retweeted_status.geo:null);
+				console.log(geo);
+				if(!tweet.retweeted_status){
+					console.log(tweet);
+					
+				}
+				if (geo) {
+					results.push({
+				 		id:tweet.id,
+				 		user:tweet.user.screem_name,
+				 		text:tweet.text,
+				 		lat:geo.coordinates[0],
+				 		lng:geo.coordinates[1]
+					});
+				}
+
+			});
+
+			//console.log(statuses);
+			res.jsonp({"result":results});
 
 		});
-	}
+	
+	
 });
+
+
 var data = {"autocomplete":[{
 	id : 1,
 	first_name : "Jon",
@@ -103,6 +135,8 @@ app.get('/api/autocompletes', function(req, res) {
 	res.json(data);
 });
 //Router API
-app.get('/api/search/:query', api.search);
+//app.get('/api/results', api.results);
+//app.get('/api/results/q=:q?&geocode=:geocode?&lang=:lang?&result_type=:result_type?&count=:count?', api.results);
+app.get('/api/results?latitude=:lat?&longitude=:lng?&radio=:radio?', api.results);
 app.get('/api/autocompletes',api.autocompletes);
 app.get('/api/autocompletes/:query', api.autocompletes);

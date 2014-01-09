@@ -56,3 +56,12 @@ App.Autocomplete  = DS.Model.extend({
   email:        DS.attr('string'),
   password:      DS.attr('string')
  });
+
+
+App.Result  = DS.Model.extend({
+  user:    DS.attr('string'),
+  text:    DS.attr('string'),
+  lat:     DS.attr('string'),
+  lng: 	   DS.attr('string')
+ });
+

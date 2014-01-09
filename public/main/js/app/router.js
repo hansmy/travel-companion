@@ -27,7 +27,7 @@ App.Router.map(function() {
 
 App.AutocompleteRoute = Em.Route.extend({
 	model : function() {
-		this.get('store').find('autocomplete');
+		return this.get('store').find('result');
 		//return App.SearchResult.find({firstName:params.firstName,lastName:params.lastName,city:params.city})
 	},
 
@@ -41,7 +41,7 @@ App.AutocompleteRoute = Em.Route.extend({
 
 App.ApplicationRoute = Em.Route.extend({
 	model : function() {
-		this.get('store').find('autocomplete');
+		return this.get('store').find('result');
 		//return App.SearchResult.find({firstName:params.firstName,lastName:params.lastName,city:params.city})
 	},
 	setupController : function(controller, model) {

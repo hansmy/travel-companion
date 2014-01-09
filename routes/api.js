@@ -3,7 +3,7 @@
  * GET users listing.
  */
 
-exports.search = function(req, res) {
+exports.results = function(req, res) {
 	//console.log(req);
 	
 };

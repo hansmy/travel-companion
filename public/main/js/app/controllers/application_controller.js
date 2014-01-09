@@ -154,6 +154,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 	actions:{
 		changedLocation:function(newLocation){
 			this.set('location',newLocation);
+			
 		},
 		locatedMe :function(){
 			this.getGeoLocation();
