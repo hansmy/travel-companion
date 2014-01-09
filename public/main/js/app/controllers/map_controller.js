@@ -224,7 +224,7 @@ App.MapController = Ember.ObjectController.extend({
 	            var lat=   result.get('lat');
 	            
 	           	//validation is not already load
-	            var marker = App.Twitter.create({
+	           /* var marker = App.Twitter.create({
 					location : {
 						lat : lat,
 						lng : lng
@@ -235,10 +235,12 @@ App.MapController = Ember.ObjectController.extend({
 					name : "Tweet"//,
 					//timestamp: twt.created_at
 				});
+*/
+				
 				//add tweet as a marker
 				
 				var markers=that.get('markers');
-				markers.pushObject(marker);
+				markers.pushObject(result);
 			});
             // do something with the users
         });

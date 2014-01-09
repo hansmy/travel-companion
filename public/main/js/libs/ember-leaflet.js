@@ -189,6 +189,9 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
 			self.set('location.lat', latlng.lat);
 			self.set('location.lng', latlng.lng);
 		});
+		if(this.get('popupText')){
+			marker.bindPopup(this.get('popupText'));
+		}
 		this.set('marker', marker);
 		return marker;
 	}.property(),

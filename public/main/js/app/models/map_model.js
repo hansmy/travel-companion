@@ -63,14 +63,14 @@ App.Result  = DS.Model.extend(Ember.LeafletMarkerMixin, {
   	user:    DS.attr('string'),
   	text:    DS.attr('string'),
   	lat:     DS.attr('string'),
-	lng: 	   DS.attr('string'),
+	lng: 	 DS.attr('string'),
 
 	highlight : false,
 	draggable : false,
 
 	title : 'name',
 
-	popupBinding : 'textpopup',
+
 	// Default normal icon
 	normalIcon : L.AwesomeMarkers.icon({
 		icon : 'icon-twitter',
@@ -84,6 +84,9 @@ App.Result  = DS.Model.extend(Ember.LeafletMarkerMixin, {
 	location: function  () {
 		return  {lat: this.get('lat'),lng: this.get('lng')};
 	}.property('lat', 'lng'),
+	popupText  : function  () {
+		return "<ul class='media-list'>" +this.get('text') + "</ul>";
+	}.property('text'),
 	highlightDidChange : function() {
 		var marker = this.get('marker');
 		var highlight = this.get('highlight');
