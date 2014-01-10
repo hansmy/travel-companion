@@ -1,10 +1,11 @@
 
-		<a {{bindAttr href="view.tweetUrl"}} class="pull-left"> 
-			 	<img class="media-object" {{bindAttr src="view.tweetProfileImage"}}>
+		<a {{bind-attr href="view.tweetUrl"}} class="pull-left"> 
+			 	<img class="media-object" {{bind-attr src="view.tweetProfileImage"}}>
 		</a>
 		<div class="media-body">
 			<span class="media-heading"> <strong> {{content.tweet.user.name}}</strong> 
-				<a {{bindAttr href="view.tweetUrl"}}>@ {{content.tweet.user.screen_name}}  </a>
+				<span class='timestamp pull-right'><a class='date_created'> {{ago content.tweet.created_at}} </a></span> </span>
+				<a {{bind-attr href="view.tweetUrl"}}>@ {{content.tweet.user.screen_name}}  </a>
 			</span> 
 		<p>  {{parseTweet content.tweet.text}} + </p>
 		</div>

@@ -96,7 +96,8 @@ twit.stream('statuses/filter', {
 				 		user:tweet.user.screem_name,
 				 		text:tweet.text,
 				 		lat:geo.coordinates[0],
-				 		lng:geo.coordinates[1]
+				 		lng:geo.coordinates[1],
+				 		tweet:tweet
 					});
 				}
 

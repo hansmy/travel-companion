@@ -10,6 +10,7 @@ App.TweetView = Ember.View.extend({
         return this.get('content.id') === this.get('controller.controllers.photosSelectedPhoto.content.id');
     }.property('controller.controllers.photosSelectedPhoto.content', 'content')
 */
+  
 
 	tweetUrl: function() {
 			

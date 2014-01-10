@@ -210,7 +210,7 @@ App.MapController = Ember.ObjectController.extend({
     		//this.set('count', 0);
        		var store=this.get('store');
 			var center=this.get('center');
-		
+			var loaded = this.store.all('result');
 			
 			
 			console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
@@ -219,28 +219,13 @@ App.MapController = Ember.ObjectController.extend({
      		// do stuff with each results
      		
 			results.forEach(function(result) {
-	            var text = result.get('text');
-	            var lng=   result.get('lng');
-	            var lat=   result.get('lat');
-	            
-	           	//validation is not already load
-	           /* var marker = App.Twitter.create({
-					location : {
-						lat : lat,
-						lng : lng
-					},
-					text : text,
-					tweet : result,
-					textpopup : "<ul class='media-list'>" +text + "</ul>",
-					name : "Tweet"//,
-					//timestamp: twt.created_at
-				});
-*/
-				
-				//add tweet as a marker
-				
-				var markers=that.get('markers');
-				markers.pushObject(result);
+	            var markers=that.get('markers');
+	            console.log(result);
+	            var id=result.get('id');
+
+				if(!markers.isAny('id',result.get('id')))	{
+					markers.pushObject(result);
+				}
 			});
             // do something with the users
         });
