@@ -82,9 +82,10 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
+		var results = [];
 		if(data){
 			var statuses = data.statuses;
-			var results = [];
+			
 
 			statuses.forEach(function(tweet) {
 
@@ -106,12 +107,12 @@ app.get('/api/results', function(req, res) {
 				}
 
 			});
-
-			//console.log(statuses);
-			res.jsonp({
-				"result" : results
-			});
 		}
+			//console.log(statuses);
+		res.jsonp({
+				"result" : results
+		});
+		
 	});
 
 
