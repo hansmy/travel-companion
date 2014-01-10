@@ -45,7 +45,8 @@ var twit = new twitter({
 	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
 	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
 	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
-	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'
+	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A',
+	search_base: 'https://api.twitter.com/1.1/search'
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
