@@ -76,8 +76,8 @@ app.get('/api/results', function(req, res) {
 	//console.log(req);
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	
-	twit.search("", {
+	console.log(req);
+	twit.search(geocode, {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
