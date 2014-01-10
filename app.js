@@ -82,35 +82,35 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-	
-		var statuses = data.statuses;
-		var results = [];
+		console.log(data);
+			var statuses = data.statuses;
+			var results = [];
 
-		statuses.forEach(function(tweet) {
+			statuses.forEach(function(tweet) {
 
-			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
-			
-			if (!tweet.retweeted_status) {
-				console.log(tweet);
+				var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
+				
+				if (!tweet.retweeted_status) {
+					console.log(tweet);
 
-			}
-			if (geo) {
-				results.push({
-					id : tweet.id,
-					user : tweet.user.screem_name,
-					text : tweet.text,
-					lat : geo.coordinates[0],
-					lng : geo.coordinates[1],
-					tweet : tweet
-				});
-			}
+				}
+				if (geo) {
+					results.push({
+						id : tweet.id,
+						user : tweet.user.screem_name,
+						text : tweet.text,
+						lat : geo.coordinates[0],
+						lng : geo.coordinates[1],
+						tweet : tweet
+					});
+				}
 
-		});
+			});
 
-		//console.log(statuses);
-		res.jsonp({
-			"result" : results
-		});
+			//console.log(statuses);
+			res.jsonp({
+				"result" : results
+			});
 
 	});
 
