@@ -10,4 +10,4 @@ App.searchResults = App.ArrayController.create({
 			this._idCache[id] = tweet.id;
 		}
 	}
-}); 
+});

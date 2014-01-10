@@ -71,61 +71,67 @@ twit.stream('statuses/filter', {
 // API
 //http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 
-	app.get('/api/results', function(req, res) {
-		//console.log(req.query);
-		//console.log(req);
-		
-		var geocode=req.query.lat+","+req.query.lng+","+req.query.radio;
-		console.log(geocode);
-		twit.search("", {"geocode":geocode, count:10,result_type: "recent"}, function(err, data) {
-			//res.json(data);
-			var statuses=data.statuses;
-			var results=[];
+app.get('/api/results', function(req, res) {
+	//console.log(req.query);
+	//console.log(req);
+
+	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
+	
+	twit.search("", {
+		"geocode" : geocode,
+		count : 10,
+		result_type : "recent"
+	}, function(err, data) {
+	
+		var statuses = data.statuses;
+		var results = [];
+
+		statuses.forEach(function(tweet) {
+
+			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
 			
-			statuses.forEach(function(tweet){
-			
-				var geo=tweet.geo?tweet.geo:(tweet.retweeted_status?tweet.retweeted_status.geo:null);
-				console.log(geo);
-				if(!tweet.retweeted_status){
-					console.log(tweet);
+			if (!tweet.retweeted_status) {
+				console.log(tweet);
 
-				}
-				if (geo) {
-					results.push({
-				 		id:tweet.id,
-				 		user:tweet.user.screem_name,
-				 		text:tweet.text,
-				 		lat:geo.coordinates[0],
-				 		lng:geo.coordinates[1],
-				 		tweet:tweet
-					});
-				}
-
-			});
-
-			//console.log(statuses);
-			res.jsonp({"result":results});
+			}
+			if (geo) {
+				results.push({
+					id : tweet.id,
+					user : tweet.user.screem_name,
+					text : tweet.text,
+					lat : geo.coordinates[0],
+					lng : geo.coordinates[1],
+					tweet : tweet
+				});
+			}
 
 		});
-	
-	
+
+		//console.log(statuses);
+		res.jsonp({
+			"result" : results
+		});
+
+	});
+
 });
 
+var data = {
+	"autocomplete" : [{
+		id : 1,
+		first_name : "Jon",
+		last_name : "Snow",
+		email : "jon.snow@got.com",
+		password : "67f128a9012553cc2132747e83fe08d749d6bacfd313207d9f1be3fb0e1b62804c5477a84711926b672bd912bfec3c9e41ce89e6060aaea6b20b734036a8962e"
+	}, {
+		id : 2,
+		first_name : "Arya",
+		last_name : "Stark",
+		email : "arya.stark@got.com",
+		password : "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f"
 
-var data = {"autocomplete":[{
-	id : 1,
-	first_name : "Jon",
-	last_name : "Snow",
-	email : "jon.snow@got.com",
-	password : "67f128a9012553cc2132747e83fe08d749d6bacfd313207d9f1be3fb0e1b62804c5477a84711926b672bd912bfec3c9e41ce89e6060aaea6b20b734036a8962e"
-}, {
-	id : 2,
-	first_name : "Arya",
-	last_name : "Stark",
-	email : "arya.stark@got.com",
-	password : "074bcd983bc6e39b1e6183c093ffb6d9357f540c9b9206f480af79012ee0c5c22785ca4428e83dc0fabb2af973ae2a930e78c9407f11cac2b59b373c8198a96f"
-
-}]};
+	}]
+};
 
 app.get('/api/autocompletes/:query', function(req, res) {
 	res.json(data);
@@ -137,5 +143,5 @@ app.get('/api/autocompletes', function(req, res) {
 //app.get('/api/results', api.results);
 //app.get('/api/results/q=:q?&geocode=:geocode?&lang=:lang?&result_type=:result_type?&count=:count?', api.results);
 app.get('/api/results?latitude=:lat?&longitude=:lng?&radio=:radio?', api.results);
-app.get('/api/autocompletes',api.autocompletes);
+app.get('/api/autocompletes', api.autocompletes);
 app.get('/api/autocompletes/:query', api.autocompletes);

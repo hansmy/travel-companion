@@ -189,7 +189,7 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
 			self.set('location.lat', latlng.lat);
 			self.set('location.lng', latlng.lng);
 		});
-		if(this.get('popupText')){
+		if (this.get('popupText')) {
 			marker.bindPopup(this.get('popupText'));
 		}
 		this.set('marker', marker);
@@ -266,7 +266,7 @@ Ember.LeafletMarkerMixin = Ember.Mixin.create({
  */
 Ember.LeafletView = Ember.View.extend({
 	classNames : ['ember-leaflet'],
-	
+
 	//default zoom level
 	zoomLevelValue : 13,
 	zoomLevel : function(key, value) {
@@ -310,13 +310,13 @@ Ember.LeafletView = Ember.View.extend({
 		console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
 	}.observes('center.lat', 'center.lng'),
 
-
-
-
-	myLocationDidChange:function(){
-		var map=this.get('map');
-		var map=this.get('locate');
-		 map.locate({setView: true, maxZoom: 16});
+	myLocationDidChange : function() {
+		var map = this.get('map');
+		var map = this.get('locate');
+		map.locate({
+			setView : true,
+			maxZoom : 16
+		});
 	}.observes('locate'),
 
 	// Real markers array
@@ -343,17 +343,17 @@ Ember.LeafletView = Ember.View.extend({
 		if (addCount > 0) {
 			var leafletMarkers = this.get('leafletMarkers');
 			var map = this.get('map');
-			if(map!=null){
-			var addedObjects = array.slice(start, start + addCount);
-			addedObjects.forEach(function(object, index) {
-				var marker = object.get('marker');
-				//this.createMarker(object);
-				marker.addTo(map);
-				//object.set('marker', marker);
-				object.set('map', map);
-				leafletMarkers.set(object, marker);
+			if (map != null) {
+				var addedObjects = array.slice(start, start + addCount);
+				addedObjects.forEach(function(object, index) {
+					var marker = object.get('marker');
+					//this.createMarker(object);
+					marker.addTo(map);
+					//object.set('marker', marker);
+					object.set('map', map);
+					leafletMarkers.set(object, marker);
 
-			}, this);
+				}, this);
 			}
 		}
 	},

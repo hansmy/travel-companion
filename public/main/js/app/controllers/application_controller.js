@@ -192,4 +192,4 @@ App.ApplicationController = Ember.ObjectController.extend({
 	locationFailed : function(error) {
 		console.log(error);
 	}
-}); 
+});

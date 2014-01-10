@@ -6,22 +6,20 @@
 
 App.Router = Ember.Router.extend({
 
-	location : Ember.Location.create({
+	/*location : Ember.Location.create({
 		implementation : 'none'
-	})
-	/*location : 'hash'*/
+	})*/
+	location : 'hash'
 });
 
 App.Router.map(function() {
-	this.resource('index', {
-		path : '/'
-	}, function() {
+
 		this.resource('map');
 		this.resource('list');
 		this.route('autocomplete', {
 			path : 'autocomplete/:query'
 		});
-	});
+	
 
 });
 

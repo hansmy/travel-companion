@@ -2,25 +2,25 @@
 var MAX_SIZE_TWEETS_MODAL = 20;
 App.MapController = Ember.ObjectController.extend({
 	zoom : 12,
-	needs:'application',
+	needs : 'application',
 	//the location of the screen or searched place
-	location:null,
-	locationBinding:'controllers.application.location',
+	location : null,
+	locationBinding : 'controllers.application.location',
 	//the users current location using HTML5
-	myLocation:false,
-	myLocationBinding:'controllers.application.myLocation',
+	myLocation : false,
+	myLocationBinding : 'controllers.application.myLocation',
 	//Array of Markers
 	markers : Ember.A(),
-	markersBinding: 'controllers.application.results',
+	markersBinding : 'controllers.application.results',
 	init : function() {
-		this.set('store', this.store); 
+		this.set('store', this.store);
 	},
 	//modelBinding:"controllers.application.model",
 	center : Ember.Object.create({
 		lat : 51.505,
 		lng : -0.09
 	}),
-	
+
 	remove : function(s) {
 		this.get('markers').removeObject(s);
 	},
@@ -177,57 +177,55 @@ App.MapController = Ember.ObjectController.extend({
 		}));
 	},
 
+	locationDidChange : function() {
 
+		var location = this.get("location");
+		var bbox = location.get('boundingbox');
+		if (bbox) {
+			var southWest = L.latLng(bbox[0], bbox[2]);
+			var northEast = L.latLng(bbox[1], bbox[3]);
+			var bounds = L.latLngBounds(southWest, northEast);
+			var center = bounds.getCenter();
+			this.set('center', Ember.Object.create(center));
 
-	locationDidChange: function(){
+		}
 
-			var location=this.get("location");
-			var bbox=location.get('boundingbox');
-			if(bbox){
-				var southWest = L.latLng(bbox[0], bbox[2]);
-   		 		var northEast = L.latLng(bbox[1], bbox[3]);
-   		 		var bounds = L.latLngBounds(southWest, northEast);
-   		 		var center = bounds.getCenter();
-   		 		this.set('center',Ember.Object.create(center));
-
-			}
-
-
-			
 	}.observes('location'),
-	myLocationDidChange:function(){
-		var myLocation=this.get('myLocation');
-		this.set('center',myLocation);
+	myLocationDidChange : function() {
+		var myLocation = this.get('myLocation');
+		this.set('center', myLocation);
 	}.observes('myLocation'),
-	centerChange: function  () {
-		
-		
+	centerChange : function() {
+
 		this.searchTerm();
 
 	}.observes('center.lat', 'center.lng'),
-	searchTerm: App.debouncePromise(function() {
-    var searchController = this;
-    		//this.set('count', 0);
-       		var store=this.get('store');
-			var center=this.get('center');
-			var loaded = this.store.all('result');
-			
-			
-			console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
-			that=this;
-			return store.find('result',{lat:center.lat,lng:center.lng,radio:"2km"}).then( function(results) {
-     		// do stuff with each results
-     		
-			results.forEach(function(result) {
-	            var markers=that.get('markers');
-	            console.log(result);
-	            var id=result.get('id');
+	searchTerm : App.debouncePromise(function() {
+		var searchController = this;
+		//this.set('count', 0);
+		var store = this.get('store');
+		var center = this.get('center');
+		var loaded = this.store.all('result');
 
-				if(!markers.isAny('id',result.get('id')))	{
+		console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
+		that = this;
+		return store.find('result', {
+			lat : center.lat,
+			lng : center.lng,
+			radio : "2km"
+		}).then(function(results) {
+			// do stuff with each results
+
+			results.forEach(function(result) {
+				var markers = that.get('markers');
+				console.log(result);
+				var id = result.get('id');
+
+				if (!markers.isAny('id', result.get('id'))) {
 					markers.pushObject(result);
 				}
 			});
-            // do something with the users
-        });
-    }, 3000)
+			// do something with the users
+		});
+	}, 3000)
 });
