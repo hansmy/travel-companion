@@ -8,7 +8,7 @@
   "dependencies": {
     "express": "3.1.0",
     "jade": "*",
-    "ntwitter":"0.2.10",
+    "ntwitter":"*",
     "socket.io": "*"
   }
 }
