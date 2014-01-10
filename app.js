@@ -41,6 +41,10 @@ io.configure(function() {
 /*
 /****************************************************************/
 /**Production- TravelCompanionApp on Twitter*/
+
+
+
+
 var twit = new twitter({
 	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
 	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
@@ -60,6 +64,82 @@ twit = new twitter({
 /***************************************************/
 //51.527264,  -0.10247
 //twit.stream('statuses/filter', {'locations':'-76.83,3.11,-76.12,3.61'}, function(stream) {
+
+
+twitter.prototype.search = function(q, params, callback) {
+
+  if (typeof params === 'function') {
+    callback = params;
+    params = null;
+  }
+  var merge=function merge(defaults, options) {
+  defaults = defaults || {};
+  	if (options && typeof options === 'object') {
+    	var keys = Object.keys(options);
+   		 for (var i = 0, len = keys.length; i < len; i++) {
+     	 var k = keys[i];
+     	 if (options[k] !== undefined) defaults[k] = options[k];
+    	}
+  	}
+  	return defaults;
+  }
+
+  if ( typeof callback !== 'function' ) {
+    throw 'FAIL: INVALID CALLBACK.';
+    return this;
+  }
+//question tweets search
+  var url = this.options.search_base + '/tweets.json';
+  params = merge(params, {q:q});
+  this.get(url, params, callback);
+  return this;
+}
+
+
+
+/*.prototype.search = function(q, params, callback) {
+	console.log(q);
+    if (typeof params === 'function') {
+        callback = params;
+        params = {};
+     }
+
+    if ( typeof callback !== 'function' ) {
+        throw new Error('FAIL: INVALID CALLBACK.');
+        return this;
+    }
+
+    var url = this.options.rest_base + '/search/tweets.json?q=' + q.replace('#', '%23') + '&' + querystring.stringify(params);
+
+    var request = this.oauth.get(url, this.options.access_token_key, this.options.access_token_secret, function(error, data, response) {
+        if ( error && error.statusCode ) {
+            var err = new Error('HTTP Error ' + error.statusCode + ': ' + http.STATUS_CODES[error.statusCode]);
+            err.statusCode = error.statusCode;
+            err.data = error.data;
+
+            callback(err);
+        } 
+        else if (error) {
+            callback(error);
+        }
+        else {
+            try {
+                var json = JSON.parse(data);
+            } 
+            catch(err) {
+                return callback(err);
+            }
+
+            callback(null, json);
+        }
+    });
+
+    return this;
+}
+
+
+*/
+
 twit.stream('statuses/filter', {
 	'locations' : '-0.1125,51.5071,-0.0923,51.5473'
 }, function(stream) {
@@ -78,10 +158,7 @@ app.get('/api/results', function(req, res) {
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
 	console.log(twit);
-	twit
-  .verifyCredentials(function (err, data) {
-    console.log(data);
-  }).search("", {
+	twit.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
