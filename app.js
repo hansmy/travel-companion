@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-/*
+
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -83,37 +83,37 @@ app.get('/api/results', function(req, res) {
 		result_type : "recent"
 	}, function(err, data) {
 		if(data){
-		var statuses = data.statuses;
-		var results = [];
+			var statuses = data.statuses;
+			var results = [];
 
-		statuses.forEach(function(tweet) {
+			statuses.forEach(function(tweet) {
 
-			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
-			
-			if (!tweet.retweeted_status) {
-				console.log(tweet);
+				var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
+				
+				if (!tweet.retweeted_status) {
+					console.log(tweet);
 
-			}
-			if (geo) {
-				results.push({
-					id : tweet.id,
-					user : tweet.user.screem_name,
-					text : tweet.text,
-					lat : geo.coordinates[0],
-					lng : geo.coordinates[1],
-					tweet : tweet
-				});
-			}
+				}
+				if (geo) {
+					results.push({
+						id : tweet.id,
+						user : tweet.user.screem_name,
+						text : tweet.text,
+						lat : geo.coordinates[0],
+						lng : geo.coordinates[1],
+						tweet : tweet
+					});
+				}
 
-		});
+			});
 
-		//console.log(statuses);
-		res.jsonp({
-			"result" : results
-		});
-
+			//console.log(statuses);
+			res.jsonp({
+				"result" : results
+			});
+		}
 	});
-}
+
 
 });
 
