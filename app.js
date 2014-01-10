@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-
+/*
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -72,50 +72,47 @@ twit.stream('statuses/filter', {
 //http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 
 app.get('/api/results', function(req, res) {
-	console.log(req.query);
+	//console.log(req.query);
 	//console.log(req);
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	console.log(geocode);
-	twit.search(geocode, {
+	
+	twit.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
+	
+		var statuses = data.statuses;
 		var results = [];
-		//console.log(data);
-		if(data){
-			var statuses = data.statuses;
+
+		statuses.forEach(function(tweet) {
+
+			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
 			
+			if (!tweet.retweeted_status) {
+				console.log(tweet);
 
-			statuses.forEach(function(tweet) {
+			}
+			if (geo) {
+				results.push({
+					id : tweet.id,
+					user : tweet.user.screem_name,
+					text : tweet.text,
+					lat : geo.coordinates[0],
+					lng : geo.coordinates[1],
+					tweet : tweet
+				});
+			}
 
-				var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
-				
-				if (!tweet.retweeted_status) {
-					console.log(tweet);
-
-				}
-				if (geo) {
-					results.push({
-						id : tweet.id,
-						user : tweet.user.screem_name,
-						text : tweet.text,
-						lat : geo.coordinates[0],
-						lng : geo.coordinates[1],
-						tweet : tweet
-					});
-				}
-
-			});
-		}
-			//console.log(statuses);
-		res.jsonp({
-				"result" : results
 		});
-		
-	});
 
+		//console.log(statuses);
+		res.jsonp({
+			"result" : results
+		});
+
+	});
 
 });
 
