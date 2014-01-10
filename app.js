@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-
+/*
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -72,7 +72,7 @@ twit.stream('statuses/filter', {
 //http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 
 app.get('/api/results', function(req, res) {
-	//console.log(req.query);
+	console.log(req.query);
 	//console.log(req);
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
