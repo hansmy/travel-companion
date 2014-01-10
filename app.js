@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-
+/*
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -82,7 +82,7 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-	
+		if(data){
 		var statuses = data.statuses;
 		var results = [];
 
@@ -113,6 +113,7 @@ app.get('/api/results', function(req, res) {
 		});
 
 	});
+}
 
 });
 
