@@ -83,6 +83,7 @@ app.get('/api/results', function(req, res) {
 		result_type : "recent"
 	}, function(err, data) {
 		var results = [];
+		console.log(data);
 		if(data){
 			var statuses = data.statuses;
 			
