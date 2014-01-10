@@ -61,7 +61,7 @@ App.Adapter = DS.RESTAdapter.extend({
 });
 
 DS.RESTAdapter.reopen({
-	host : "http://localhost:3000",
+	// : "http://localhost:3000",
 	//host : "http://www.ambiecities.com",
 	namespace : "api"
 });
