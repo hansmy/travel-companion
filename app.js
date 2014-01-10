@@ -49,7 +49,7 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-/*
+
 twit = new twitter({
 	consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 	consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
@@ -76,14 +76,14 @@ app.get('/api/results', function(req, res) {
 	//console.log(req);
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	console.log(req);
+	console.log(geocode);
 	twit.search(geocode, {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
 		var results = [];
-		console.log(data);
+		//console.log(data);
 		if(data){
 			var statuses = data.statuses;
 			
