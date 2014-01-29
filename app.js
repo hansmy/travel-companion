@@ -3,7 +3,7 @@
  */
 
 var express = require('express'), routes = require('./routes'), api = require('./routes/api'), http = require('http'), twitter = require('ntwitter'), path = require('path');
-var hashmap = require('hashmap'), GeoHasher = require('geohasher');
+var hashmap = HashMap = require('hashmap').HashMap, GeoHasher = require('geohasher');
 
 var Rx = require('rx'), EventEmitter = require('events').EventEmitter;
 // Flag for new geohash
@@ -120,8 +120,32 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('getLiveTweets', function(data) {
 		console.log('client asking for live tweets for' + data.query);
+		var resolution = 4;
+		var neighbors = data.query;
+		
+		for (key in neighbors) {
+			console.log(key+" : "+neighbors[key]);
+		}
+		var topright = neighbors.topright;
+		console.log('New TopRight: ' + topright);
+		var bottomleft = neighbors.bottomleft;
+		console.log('New BotomLeft: ' + bottomleft);
+		//51.547,-0.0923
+		var cBottomLeft = GeoHasher.encode(51.547, -0.0923);
+		cBottomLeft = cBottomLeft.substr(0, resolution);
+		console.log('Current BotomLeft: ' + cBottomLeft);
+		//51.5071,-0.1125
+		var cTopRight = GeoHasher.encode(51.5071, -0.1125);
+		cTopRight = cTopRight.substr(0, resolution);
+		console.log('Current TopRight: ' + cTopRight);
 
-		var hash = geohash.encode(data.query.lat, data.query.lng);
+		var top = cTopRight > topright;
+		console.log('Top: ' + top);
+		var bottom = cBottomLeft > bottomleft;
+		console.log('Bottom: ' + bottom);
+		//hashmap.
+
+		//var hash = .encode(data.query.lat, data.query.lng);
 
 		var options = {
 			'track' : data.query
@@ -274,13 +298,16 @@ app.get('/api/results?latitude=:lat?&longitude=:lng?&radio=:radio?', api.results
 app.get('/api/autocompletes', api.autocompletes);
 app.get('/api/autocompletes/:query', api.autocompletes);
 
-
-app.get('/', function(req, res){
-  res.send("Hello Cybertron!")
+app.get('/', function(req, res) {
+	res.send("Hello Cybertron!")
 });
-app.get('/insecticons.json', function(req, res){
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.write(JSON.stringify({insecticons : ["Shrapnel","Bombshell", "Kickback"]}));
-  res.end();
+app.get('/insecticons.json', function(req, res) {
+	res.writeHead(200, {
+		'Content-Type' : 'application/json'
+	});
+	res.write(JSON.stringify({
+		insecticons : ["Shrapnel", "Bombshell", "Kickback"]
+	}));
+	res.end();
 });
 
