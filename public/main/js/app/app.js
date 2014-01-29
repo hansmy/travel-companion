@@ -38,18 +38,12 @@ App = Ember.Application.create({
 	LOG_BINDINGS : true,
 	LOG_TRANSITIONS : true,
 	templates : ['application', 'map', 'list', 'tabs', 'tweet', 'autocomplete'],
-	ready : function() {
-		var socket = io.connect();
-		var controller;
-		socket.on('tweet', function(json) {
-			if (json.geo) {
-				var index = App.__container__.lookup('controller:application');
-				index.addTweet(json);
-			}
-
-		});
-
-	}
+	Socket : EmberSockets.extend({
+		host : window.location.hostname,
+		port : window.location.port,
+		controllers : ['application']
+	})
+	
 });
 /* Ember Data */
 App.Store = DS.Store.extend({
@@ -61,8 +55,8 @@ App.Adapter = DS.RESTAdapter.extend({
 });
 
 DS.RESTAdapter.reopen({
-	// : "http://localhost:3000",
-	host : "http://www.ambiecities.com",
+	host : "http://localhost:3000",
+	//host : "http://www.ambiecities.com",
 	namespace : "api"
 });
 /*App.store = DS.Store.create({

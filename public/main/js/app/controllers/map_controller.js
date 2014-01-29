@@ -12,14 +12,12 @@ App.MapController = Ember.ObjectController.extend({
 	//Array of Markers
 	markers : Ember.A(),
 	markersBinding : 'controllers.application.results',
+
+	centerBinding : 'controllers.application.center',
 	init : function() {
 		this.set('store', this.store);
 	},
 	//modelBinding:"controllers.application.model",
-	center : Ember.Object.create({
-		lat : 51.505,
-		lng : -0.09
-	}),
 
 	remove : function(s) {
 		this.get('markers').removeObject(s);
@@ -191,6 +189,7 @@ App.MapController = Ember.ObjectController.extend({
 		}
 
 	}.observes('location'),
+
 	myLocationDidChange : function() {
 		var myLocation = this.get('myLocation');
 		this.set('center', myLocation);
@@ -202,12 +201,11 @@ App.MapController = Ember.ObjectController.extend({
 	}.observes('center.lat', 'center.lng'),
 	searchTerm : App.debouncePromise(function() {
 		var searchController = this;
-		//this.set('count', 0);
+
 		var store = this.get('store');
 		var center = this.get('center');
-		var loaded = this.store.all('result');
 
-		console.log('centerDidChange', 'center to ' + [center.get('lat'), center.get('lng')]);
+		console.log('searchTerm-debouncePromise', 'center to ' + [center.get('lat'), center.get('lng')]);
 		that = this;
 		return store.find('result', {
 			lat : center.lat,
@@ -215,17 +213,17 @@ App.MapController = Ember.ObjectController.extend({
 			radio : "2km"
 		}).then(function(results) {
 			// do stuff with each results
-
 			results.forEach(function(result) {
+				// do stuff with each result
 				var markers = that.get('markers');
-				console.log(result);
 				var id = result.get('id');
-
-				if (!markers.isAny('id', result.get('id'))) {
+				//if is not loaded in markes
+				if (!markers.isAny('id', id)) {
+					//add to markers
 					markers.pushObject(result);
 				}
 			});
-			// do something with the users
+
 		});
 	}, 3000)
 });

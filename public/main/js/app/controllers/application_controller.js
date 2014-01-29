@@ -5,9 +5,83 @@ App.ApplicationController = Ember.ObjectController.extend({
 	_idCache : {},
 	_lastTweet : null,
 	_counter : 0,
+	center : Ember.Object.create({
+		lat : 51.505,
+		lng : -0.09
+	}),
+	init : function() {
+		
+		Ember.run.later(this, function(){
+			this.send('getLiveTweets')
+		});
+
+	},
+
+	actions : {
+
+		/**
+		 * @method getLiveTweets
+		 * @emit getLiveTweets
+		 * @return {void}
+		 */
+		getLiveTweets : function() {
+			var location = this.get("center");
+			var hash = GeoHasher.encode(location.lat, location.lng);
+			var neighbors=GeoHasher.calculateAdjacent(hash, 'top');
+			this.socket.emit('getLiveTweets', {
+				
+				query : location
+			});
+
+		},
+		getTweetsBySearch : function() {
+			var location = this.get("center")
+			this.socket.emit('getLiveTweets', {
+				
+				query : location
+			});
+		},
+		changedLocation : function(newLocation) {
+			this.set('location', newLocation);
+
+		},
+		locatedMe : function() {
+			this.getGeoLocation();
+
+		}
+	},
+	/**
+	 * @property events
+	 * @type {Object}
+	 */
+	events : {
+
+		// Update the property from the data received.
+		//cherryPickedName : ['name', 'age'],
+
+		// Update the property using a callback.
+		//            cherryPickedName: function(name, age) {
+		//                this.set('name', name);
+		//                this.set('age', age);
+		//            },
+		tweet : function(json){
+				this.addTweet(json);
+		},
+		// When EmberSockets makes a connection to the Socket.IO server.
+		connect : function() {
+			console.log('EmberSockets has connected...');
+		},
+
+		// When EmberSockets disconnects from the Socket.IO server.
+		disconnect : function() {
+			console.log('EmberSockets has disconnected...');
+		}
+	},
 	addTweet : function(twt) {
 		var id = twt.id;
-		var geo = twt.geo.coordinates;
+		var geo = twt.geo ? twt.geo : (twt.retweeted_status ? twt.retweeted_status.geo : null);
+		if(geo){
+		 geo = twt.geo.coordinates;
 
 		if ( typeof this._idCache[id] === "undefined") {
 			if (geo != null || geo != undefined) {
@@ -136,29 +210,34 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 				});
 
-				//this.get('markers').pushObject(marker);
+				
 				this._idCache[id] = twt.id;
-				this.get('results').pushObject(marker);
-				//first marker is red
-				marker.set('icon', L.AwesomeMarkers.icon({
+				
+					this.get('results').pushObject(marker);
+					//latest marker is red
+					marker.set('icon', L.AwesomeMarkers.icon({
 					icon : 'icon-twitter',
 					color : 'red'
-				}));
+					}));
+				
+
+				this.store.push('result',{
+					id : twt.id,
+					user : twt.user.screem_name,
+					text : twt.text,
+					lat : geo[0],
+					lng : geo[1],
+					tweet : twt
+					});
+				
+				
 
 			}
 		}
+	}
 
 	},
-	actions : {
-		changedLocation : function(newLocation) {
-			this.set('location', newLocation);
 
-		},
-		locatedMe : function() {
-			this.getGeoLocation();
-
-		}
-	},
 	coords : false,
 
 	getGeoLocation : function() {
