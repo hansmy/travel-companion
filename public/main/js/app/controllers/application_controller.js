@@ -193,7 +193,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 					this._lastTweet = marker;
 					var real = marker.get('marker');
 					var that = this;
-					//
+					/*
 					real.on('click', function() {
 						var twt = marker.get('tweet');
 						var textpopup = "<ul class='media-list'>" + messagePopup(twt) + "</ul>";
@@ -205,7 +205,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 							var twt = marker.get('tweet');
 							$("#myModal .modal-body .selectedTweet .media-list").html(message(twt));
-							/*The latest tweets on the map*/
+							/*The latest tweets on the map
 							var aMarkers = that.get('results').toArray().reverse();
 							var last = (aMarkers.length >= MAX_SIZE_TWEETS_MODAL ) ? MAX_SIZE_TWEETS_MODAL : aMarkers.length - 1;
 							//Maximum Size
@@ -224,7 +224,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 						});
 
-					});
+					});*/
 
 					this._idCache[id] = twt.id;
 

@@ -204,7 +204,11 @@ App.MapController = Ember.ObjectController.extend({
 
 		var store = this.get('store');
 		var center = this.get('center');
-
+		//
+		
+		Ember.run.later(this, function() {
+			this.send('getLiveTweets')
+		});
 		console.log('searchTerm-debouncePromise', 'center to ' + [center.get('lat'), center.get('lng')]);
 		that = this;
 		return store.find('result', {

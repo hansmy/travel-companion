@@ -4,7 +4,7 @@
 
 var express = require('express'), routes = require('./routes'), api = require('./routes/api'), http = require('http'), twitter = require('ntwitter'), path = require('path');
 var hashmap = HashMap = require('hashmap').HashMap, GeoHasher = require('geohasher');
-
+var GeoManagerTwitter=require('./lib/geomanager');
 var Rx = require('rx'), EventEmitter = require('events').EventEmitter;
 // Flag for new geohash
 var newgeohash = false;
@@ -45,8 +45,11 @@ app.configure('development', function() {
 
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log("Express server listening on port " + app.get('port'));
+	//
+
 	eventEmitter.emit('new-twitter-location', {
-		location : '-0.1125,51.5071,-0.0923,51.5473'
+		//location : '-0.1125,51.5071,-0.0923,51.5473'
+		location : geomanager.formatTwitterLocationQuery()
 	});
 });
 var io = require('socket.io').listen(server);
@@ -111,47 +114,34 @@ twitter.prototype.search = function(q, params, callback) {
 	return this;
 }
 /***********************************************************************/
+/*			GeoManagerModule
+/***********************************************************************/
+var geomanager= new GeoManagerTwitter();
 
 io.sockets.on('connection', function(socket) {
 	console.log('client connected');
-	socket.on('changedLocation', function(data) {
-		newgeohash = true;
-	});
+	
 
 	socket.on('getLiveTweets', function(data) {
-		console.log('client asking for live tweets for' + data.query);
-		var resolution = 4;
-		var neighbors = data.query;
+		//create a user in the map, with an observable collection
+		// for each geohash area in the map
+			// create an observer
+			// areaObservableCollection <-- observer
+			// userObservableCollection <-- user
+		console.log(' client asking for live tweets for' + data.query);
+		//if client is in a new location.
+			//set flag to true
+			//buffer results
 		
-		for (key in neighbors) {
-			console.log(key+" : "+neighbors[key]);
-		}
-		var topright = neighbors.topright;
-		console.log('New TopRight: ' + topright);
-		var bottomleft = neighbors.bottomleft;
-		console.log('New BotomLeft: ' + bottomleft);
-		//51.547,-0.0923
-		var cBottomLeft = GeoHasher.encode(51.547, -0.0923);
-		cBottomLeft = cBottomLeft.substr(0, resolution);
-		console.log('Current BotomLeft: ' + cBottomLeft);
-		//51.5071,-0.1125
-		var cTopRight = GeoHasher.encode(51.5071, -0.1125);
-		cTopRight = cTopRight.substr(0, resolution);
-		console.log('Current TopRight: ' + cTopRight);
+		var neighbors = data.query;
+		//new areas
+		geomanager.checkingNewLocationQuery(neighbors, newgeohash);
 
-		var top = cTopRight > topright;
-		console.log('Top: ' + top);
-		var bottom = cBottomLeft > bottomleft;
-		console.log('Bottom: ' + bottom);
-		//hashmap.
+	});
 
-		//var hash = .encode(data.query.lat, data.query.lng);
-
-		var options = {
-			'track' : data.query
-		};
-		newgeohash = true;
-
+	
+	socket.on('tweet',function(data){
+		console.log("Tweet...");
 	});
 
 	socket.on('getTweetsBySearch', function(data) {
@@ -172,9 +162,12 @@ io.sockets.on('connection', function(socket) {
 //	Custom Events
 //
 //****************************************************************/
+
+
+
 var eventEmitter = new EventEmitter();
 
-var source = Rx.Observable.fromEvent(eventEmitter, 'new-twitter-location')
+var source = Rx.Observable.fromEvent(eventEmitter, 'new-twitter-location');
 
 var subscription = source.subscribe(function(filter) {
 	console.log("Creating the stream with Twitter")
@@ -187,7 +180,7 @@ var subscription = source.subscribe(function(filter) {
 		var idInterval;
 		//twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
 		stream.on('data', function(data) {
-			console.log("Tweet...");
+			
 			io.sockets.volatile.emit('tweet', data);
 			//socket.volatile.emit('tweet', data);
 		});
@@ -200,13 +193,17 @@ var subscription = source.subscribe(function(filter) {
 			//io.sockets.volatile.emit('twitter-done');
 			// when destroy newlocation
 			console.log("destroy");
-
+			geomanager.flushBufferAreas();
+			console.log(geomanager.formatTwitterLocationQuery());
 			eventEmitter.emit('new-twitter-location', {
-				location : '-0.1125,51.5071,-0.0923,51.5473'
+				location : geomanager.formatTwitterLocationQuery()
 			});
+			newgeohash = false;
+			geomanager.createBufferAreas();
+
 
 		});
-		// After 10 seconds, the applicattion checks if there is a new location
+		// After 20 seconds, the applicattion checks if there is a new location
 
 		idInterval = setInterval(function() {
 			//checks whether there is new user in untrack geohash area
@@ -215,26 +212,23 @@ var subscription = source.subscribe(function(filter) {
 				stream.emit('destroy');
 				//remove interval
 				clearInterval(idInterval);
-				newgeohash = false;
+				
 			}
-		}, 10000);
+		}, 20000);
 	});
 
 });
 ////http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 app.get('/api/results', function(req, res) {
-	//console.log(req.query);
-	//console.log(req);
-
+	
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	console.log(twit);
+	//console.log(twit);
 	twit.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-		console.log(data);
-		console.log(err);
+		
 		var statuses = data.statuses;
 		var results = [];
 
@@ -243,7 +237,7 @@ app.get('/api/results', function(req, res) {
 			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
 
 			if (!tweet.retweeted_status) {
-				console.log(tweet);
+				//console.log(tweet);
 
 			}
 			if (geo) {
