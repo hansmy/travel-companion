@@ -3,9 +3,9 @@
  */
 
 var express = require('express'), routes = require('./routes'), api = require('./routes/api'), http = require('http'), twitter = require('ntwitter'), path = require('path');
-var hashmap = HashMap = require('hashmap').HashMap, GeoHasher = require('geohasher');
+GeoHasher = require('geohasher');
 var GeoManagerTwitter=require('./lib/geomanager');
-var Rx = require('rx'), EventEmitter = require('events').EventEmitter;
+
 // Flag for new geohash
 var newgeohash = false;
 var app = express();
@@ -47,10 +47,10 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log("Express server listening on port " + app.get('port'));
 	//
 
-	eventEmitter.emit('new-twitter-location', {
+	/*eventEmitter.emit('new-twitter-location', {
 		//location : '-0.1125,51.5071,-0.0923,51.5473'
 		location : geomanager.formatTwitterLocationQuery()
-	});
+	});*/
 });
 var io = require('socket.io').listen(server);
 io.configure(function() {
@@ -116,7 +116,7 @@ twitter.prototype.search = function(q, params, callback) {
 /***********************************************************************/
 /*			GeoManagerModule
 /***********************************************************************/
-var geomanager= new GeoManagerTwitter();
+var geoManager= new GeoManagerTwitter(io);
 
 io.sockets.on('connection', function(socket) {
 	console.log('client connected');
@@ -135,8 +135,18 @@ io.sockets.on('connection', function(socket) {
 		
 		var neighbors = data.query;
 		//new areas
-		geomanager.checkingNewLocationQuery(neighbors, newgeohash);
+		//geomanager.checkingNewLocationQuery(neighbors, newgeohash);
+		/*
+		var newAreas=geomanager.getNewAreas(neighbors);
+		//if there are new areas
+		console.log('New Areas: ' + newAreas.toString());
+		if(newAreas.length>0){
+			newgeohash = true;
+			geomanager.addBufferAreas(newAreas);
+		}
+		*/
 
+		geoManager.getLiveTweetsByLocation('user1',neighbors);
 	});
 
 	
@@ -164,25 +174,36 @@ io.sockets.on('connection', function(socket) {
 //****************************************************************/
 
 
+/*
+var geoEmitter = new EventEmitter();
 
-var eventEmitter = new EventEmitter();
-
-var source = Rx.Observable.fromEvent(eventEmitter, 'new-twitter-location');
-
-var subscription = source.subscribe(function(filter) {
+var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
+*/
+//var subscription = source.subscribe(function(filter) {
 	console.log("Creating the stream with Twitter")
-	console.log('data: ' + filter);
+	//console.log('data: ' + filter);
 	//Filtering Streams
 	twit.stream('statuses/filter', {
-		'locations' : filter.location
+		//'locations' : filter.location
+		locations:'-180,-90,180,90'
 	}, function(stream) {
 
 		var idInterval;
 		//twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
-		stream.on('data', function(data) {
+		stream.on('data', function(tweet) {
 			
-			io.sockets.volatile.emit('tweet', data);
+			//io.sockets.volatile.emit('tweet', data);
 			//socket.volatile.emit('tweet', data);
+			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
+ 					if(geo==null) return false;
+ 					
+ 					var geohash=GeoHasher.encode(geo.coordinates[0], geo.coordinates[1]);
+ 						geohash = geohash.substr(0, that.resolution);
+
+			if(geoManager.containsArea(geohash)){
+					geoManager.onNext(tweet);
+				}
+
 		});
 
 		stream.on('end', function(response) {
@@ -193,6 +214,7 @@ var subscription = source.subscribe(function(filter) {
 			//io.sockets.volatile.emit('twitter-done');
 			// when destroy newlocation
 			console.log("destroy");
+			/*
 			geomanager.flushBufferAreas();
 			console.log(geomanager.formatTwitterLocationQuery());
 			eventEmitter.emit('new-twitter-location', {
@@ -200,11 +222,12 @@ var subscription = source.subscribe(function(filter) {
 			});
 			newgeohash = false;
 			geomanager.createBufferAreas();
+			**/
 
 
 		});
 		// After 20 seconds, the applicattion checks if there is a new location
-
+		/*
 		idInterval = setInterval(function() {
 			//checks whether there is new user in untrack geohash area
 			console.log("There new locations to track:" + newgeohash);
@@ -214,10 +237,10 @@ var subscription = source.subscribe(function(filter) {
 				clearInterval(idInterval);
 				
 			}
-		}, 20000);
+		}, 20000);*/
 	});
 
-});
+//});
 ////http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 app.get('/api/results', function(req, res) {
 	

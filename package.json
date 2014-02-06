@@ -17,7 +17,6 @@
     "grunt": "~0.4.1",
     "mocha": "*",
     "chai": "*",
-    "supertest": "*",
-    "hashset-native":"*"
+    "supertest": "*"
   }
 }

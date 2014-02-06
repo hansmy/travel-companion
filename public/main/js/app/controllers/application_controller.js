@@ -11,6 +11,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 	}),
 	init : function() {
 
+		//Sends ation to get the users location in the map.
 		Ember.run.later(this, function() {
 			this.send('getLiveTweets')
 		});
@@ -25,7 +26,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 		 * @return {void}
 		 */
 		getLiveTweets : function() {
-
+			console.log("getLiveTweets");
 			var location = this.get("center");
 			var geohash = GeoHasher.encode(location.lat, location.lng);
 			var resolution = 4;
@@ -43,7 +44,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 			console.log(neighbors);
 
 			var bbox=GeoHasher.decode(geohash);
-			console.log(bbox);
+			
 			//Sending the
 			this.socket.emit('getLiveTweets', {
 				query : neighbors
