@@ -245,7 +245,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 						color : 'red'
 					}));
 					var date=new Date(twt.created_at);
-					this.store.push('result', {
+					var ma=this.store.push('result', {
 						id : twt.id,
 						user : twt.user.screem_name,
 						text : twt.text,
@@ -254,6 +254,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 						tweet : twt,
 						timestamp:date.getTime()
 					});
+					console.log(ma);
 
 				}
 			}
