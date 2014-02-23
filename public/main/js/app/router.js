@@ -44,16 +44,9 @@ App.ApplicationRoute = Em.Route.extend({
 
 		controller.set('model', model);
 
-	},
-
-	actions : {
-		goToMap : function() {
-			this.transitionTo('map');
-		},
-		goToList : function() {
-			this.transitionTo('list');
-		}
 	}
+
+	
 });
 
 App.IndexRoute = Em.Route.extend({

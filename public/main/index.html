@@ -117,13 +117,18 @@
 		<script src="js/libs/twitter-text.js"></script>
 		<script src="js/libs/typeahead.js"></script>
 		<script src="js/libs/geohasher.js"></script>
+		<!-- Zynga-->
+		<script src="js/libs/zynga-scroller/Animate.js"></script>
+		<script src="js/libs/zynga-scroller/Scroller.js"></script>
+
 		<!-- HTML5 Web Socket-->
 		<script src="/socket.io/socket.io.js"></script>
 
 		<!-- Ember Plugins  -->
+		<script src="js/libs/list-view-latest.js"></script>
 		<script src="js/libs/ember-typeahead.js"></script>
 		<script src="js/libs/ember-sockets.js"></script>
-
+		
 		<!--Application -->
 		<script src="js/app/app.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/helpers/debounce.js" type="text/javascript" charset="utf-8"></script>
@@ -135,13 +140,59 @@
 		<script src="js/app/controllers/list_controller.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/controllers/autocomplete_controller.js" type="text/javascript" charset="utf-8"></script>
 		<!-- Views -->
+		
 		<script src="js/app/views/application_view.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/views/tabs_view.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/views/map_view.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/views/list_view.js" type="text/javascript" charset="utf-8"></script>
+		<!-- Ember View Component-->
+		<script src="js/app/views/ember_list_view.js"></script>
 		<script src="js/app/views/tweet_view.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/app/views/autocomplete_view.js" type="text/javascript" charset="utf-8"></script>
+
 		<script src="js/app/router.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+      document.addEventListener("DOMMouseScroll", function(e) {
+        e.preventDefault();
+      }, false);
+      document.addEventListener("mousewheel", function(e) {
+        e.preventDefault();
+      }, false);
+      document.ontouchmove = function(event){
+        event.preventDefault();
+      };
+  	</script>
+  	<style>
+      .ember-list-view {
+        overflow: auto;
+        position: relative;
+        width: 100%;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+
+      .ember-list-item-view {
+        position: absolute;
+        width: 500px;
+        height: 130px;
+      }
+      /* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+.ember-view .item{
+	width: 420px;
+	height: 70%;
+}
+      
+
+      .ember-list-container {
+        -webkit-transform: translate3d(0px, 0px, 0);
+      }
+    </style>
 
 	</body>
 </html>

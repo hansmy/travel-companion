@@ -20,6 +20,13 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 	actions : {
 
+		goToMap : function() {
+			this.transitionToRoute('map');
+		},
+		goToList : function() {
+			this.transitionToRoute('list');
+		},
+
 		/**
 		 * @method getLiveTweets
 		 * @emit getLiveTweets

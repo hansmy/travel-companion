@@ -26,31 +26,70 @@
 				
 				
 			<!-- start: Wall -->
-			<div id="wall" class="row-fluid">
+			<!-- <div id="wall" class="row-fluid"> -->
 
 							
 
-
-				  {{#each content in reverse}}
-				  	
-						 {{view App.TweetView contentBinding="content"}}
-						
-
-				  {{!  {{content.tweet.from_user}}{{!</strong></a> {{}}
-				  {{else}}
+	<div id="wall">
+	{{#collection App.EListView contentBinding="content"}}
+        	
+        	 {{view App.TweetView contentBinding="content"}}
+        	
+        	 {{else}}
 				    loading latest Tweets ...
-				  {{/each}}
+			
+      {{/collection}}
 				
-
-			</div>
+  </div>
+			<!--</div>-->
 		</div>
 </div>
 </div>
-<div class="footer">
-				<p>
-					&copy; Ambiesense
-				</p>
+<div id="under-footer">
+		
+		<!-- start: Container -->
+		<div class="container">
+			
+			<!-- start: Row -->
+			<div class="row-fluid">
+
+				<!-- start: Under Footer Logo -->
+				<div class="span2">
+					<div id="under-footer-logo">
+						<a class="brand" href="#">Ambiesense</a>
+					</div>
+				</div>
+				<!-- end: Under Footer Logo -->
+
+				<!-- start: Under Footer Copyright -->
+				<div class="span9">
+					
+					<div id="under-footer-copyright">
+							&copy; Juan David Millan 2014
+					</div>
+					
+				</div>
+				<!-- end: Under Footer Copyright -->
+
+				<!-- start: Under Footer Back To Top -->
+				<div class="span1">
+						
+					<div id="under-footer-back-to-top">
+						<a href="#"></a>
+					</div>
+				
+				</div>
+				<!-- end: Under Footer Back To Top -->
+			
 			</div>
+			<!-- end: Row -->
+			
+		</div>	
+		<!-- end: Container  -->
+		
+	</div>
+	<!-- end-->
+
 {{!
 					<ul class="thumbnails">
 						<li class="span4">

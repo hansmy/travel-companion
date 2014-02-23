@@ -41,8 +41,8 @@ Leafletjs
 	width: 100%;
 }
 .ember-view {
-	height: 100%;
-	width: 100%;
+	
+	
 }
 
 .modal-popup{
@@ -65,6 +65,10 @@ List View
 	background: #ccc
 }
 
+.twitter .media-body{
+	padding-left: 3px;
+
+}
 
 
 
@@ -554,7 +558,7 @@ header {
 =================================================================== */
 
 #wall {
-	
+	width: 500px;	
 }
 
 #wall .item,
@@ -583,8 +587,8 @@ header {
 }
 
 #wall .item {
-	margin: 0px;
-	margin-bottom: 30px;
+	margin: 2px;
+	margin-bottom: 10px;
 }
 
 #wall .item .meta {
@@ -2841,10 +2845,9 @@ a.buy:hover {
 #twitter b a:hover {color: #666; font-weight:bold}
 #twitter li {
 	background: url(../img/icons/twitter.png) no-repeat 0% 50%;
-	padding-left: 40px;
 	line-height: 18px; margin: 2px 0 12px 0;
 	}
-#twitter li:last-child {padding-left: 40px; margin: 0;}
+#twitter li:last-child { margin: 0;}
 
 
 /* Higher than 1200 (desktop devices)
