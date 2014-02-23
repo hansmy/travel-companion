@@ -23,27 +23,22 @@
 					<li><a href="#filter" ">Friends</a></li>
 				</ul>
 			</div>
-				
-				
-			<!-- start: Wall -->
-			<!-- <div id="wall" class="row-fluid"> -->
+										
 
-							
-
-	<div id="wall">
-	{{#collection App.EListView contentBinding="content"}}
+			<div id="wall">
+				{{#collection App.EListView contentBinding="content"}}
         	
-        	 {{view App.TweetView contentBinding="content"}}
+        	 			{{view App.TweetView contentBinding="content"}}
         	
-        	 {{else}}
-				    loading latest Tweets ...
+        	 	{{else}}
+				   	 loading latest Tweets ...
 			
-      {{/collection}}
+      			{{/collection}}
 				
-  </div>
+ 			 </div>
 			<!--</div>-->
 		</div>
-</div>
+	</div>
 </div>
 <div id="under-footer">
 		

@@ -64,7 +64,9 @@ List View
 #listView{
 	background: #ccc
 }
-
+#listView .container #wrapper{
+	margin-bottom: 0px;
+}
 .twitter .media-body{
 	padding-left: 3px;
 
