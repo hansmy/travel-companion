@@ -3,7 +3,7 @@ function(text) {
     if(text==null|| text== undefined){
         text="";
     }
-    var parsed = twttr.txt.autoLink(text);
+    var parsed = twttr.txt.autoLink(text,{urlTarget:'_blank'});
     return new Handlebars.SafeString(parsed);
     });
 
