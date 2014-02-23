@@ -4,7 +4,7 @@ function(text) {
         text="";
     }
     var parsed = twttr.txt.autoLink(text,{target:'_blank'});
-    console.log(parsed);
+    
     return new Handlebars.SafeString(parsed);
     });
 

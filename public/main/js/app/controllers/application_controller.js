@@ -90,6 +90,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 		//            },
 		tweet : function(json) {
 			this.addTweet(json);
+			console.log(json);
 		},
 		// When EmberSockets makes a connection to the Socket.IO server.
 		connect : function() {
