@@ -63,11 +63,14 @@ App.Result = DS.Model.extend(Ember.LeafletMarkerMixin, {
 	lat : DS.attr(),
 	lng : DS.attr(),
 	tweet : DS.attr(),
+	timestamp: DS.attr(),
 	highlight : false,
 	draggable : false,
 
 	title : 'name',
-
+	getTime: function(){
+		return this.get('tweet').created_at;
+	}.property('timestamp'),
 	// Default normal icon
 	normalIcon : L.AwesomeMarkers.icon({
 		icon : 'icon-twitter',
@@ -113,7 +116,8 @@ App.Result = DS.Model.extend(Ember.LeafletMarkerMixin, {
 		var tweet = this.get('tweet');
 		var addLinksTwitter = function(text) {
 			return text.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
-				return url.link(url);
+				var link="<a href='"+url+"' target='_blank'>"+url+"</a>";
+				return link;
 			});
 		}
 		var addHashTags = function(text) {
@@ -137,17 +141,17 @@ App.Result = DS.Model.extend(Ember.LeafletMarkerMixin, {
 
 		var str = "<div class='container-popup' >"
 		str += "<span class='tweet'" + "><img style='float: left' src='" + tweet.user.profile_image_url_https;
-		str += "' />" + "<b>" + tweet.user.screen_name + "</b><br/><a href ='http://twitter.com/";
-		str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a><br/> " + "</span>";
+		str += "' target='_blank' />" + "<b>" + tweet.user.screen_name + "</b><br/><a href ='http://twitter.com/";
+		str += tweet.user.screen_name + "' target='_blank'>@" + tweet.user.screen_name + "</a><br/> " + "</span>";
 		str += "<p>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 		str += " <li class='media tweet'>";
 		str = "<div class='row' ><div class='span3' >"
-		str += "<a class='pull-left' href='http://twitter.com/" + tweet.user.screen_name + "'>";
-		str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "'>";
+		str += "<a class='pull-left' href='http://twitter.com/" + tweet.user.screen_name + "' target='_blank'>";
+		str += "<img class='media-object' src='" + tweet.user.profile_image_url_https + "' >";
 		str += "</a>" + "<div class='media-body'>";
 		str += "<table class='' ><tr><td>";
 		str += "<strong> " + tweet.user.name + "</strong> " + "<a href ='http://twitter.com/";
-		str += tweet.user.screen_name + "'>@" + tweet.user.screen_name + "</a>" + "</td><td>";
+		str += tweet.user.screen_name + "' target='_blank'>@" + tweet.user.screen_name + "</a>" + "</td><td>";
 		str += "<span class='timestamp '><a class='date_created' href ='http://twitter.com/" + tweet.user.screen_name + "'> <p class='muted'>" + timestamp + "</p></a></span> </td></tr><tr><td>";
 		str += "<p id='text-popup'>" + addHashTags(addLinksTwitter(tweet.text)) + "</p>";
 		str += "</tr></td></table>"

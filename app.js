@@ -264,13 +264,17 @@ app.get('/api/results', function(req, res) {
 
 			}
 			if (geo) {
+				console.log(tweet.created_at);
+				var date=new Date(tweet.created_at);
+			console.log(date);
 				results.push({
 					id : tweet.id,
 					user : tweet.user.screem_name,
 					text : tweet.text,
 					lat : geo.coordinates[0],
 					lng : geo.coordinates[1],
-					tweet : tweet
+					tweet : tweet,
+					timestamp:date.getTime()
 				});
 			}
 

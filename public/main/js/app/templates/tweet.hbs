@@ -1,14 +1,18 @@
 
-	<div class="twitter">
-		<a {{bind-attr href="view.tweetUrl"}} target="_blank" class="pull-left"> 
-			 	<img class="media-object" {{bind-attr src="view.tweetProfileImage"}}>
-		</a>
+	
+		{{imageProfile content.tweet}}
+		
 		<div class="media-body">
 			<span class="media-heading"> <strong> {{content.tweet.user.name}}</strong> 
 				<span class='timestamp pull-right'><a class='date_created'> {{ago content.tweet.created_at}} </a></span> </span>
-				<a {{bind-attr href="view.tweetUrl"}} target="_blank">@ {{content.tweet.user.screen_name}}  </a>
+				{{headerTweet content.tweet}}
 			</span> 
 		<p>  {{parseTweet content.tweet.text}} + </p>
 		</div>
-	</div>	
+		<div> 
+		{{#if content.tweet.place.country}}
+			<p><span> Location: </span> {{content.tweet.place.country}} </p>
+		{{/if}}	
+		</div>
+		
 	

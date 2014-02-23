@@ -11,24 +11,22 @@
 		<div id="wrapper">
 			
 			<div id="filters">
-				<ul class="option-set" data-option-key="filter">
-					<li><a href="#filter" class="selected" >All</a></li>
+				<ul class="option-set pull-left" data-option-key="filter">
+				
+					<li><a {{action 'recent'}} {{bind-attr class="sortAscending::selected"}}  >Recent</a></li>
+
 					<li>/</li>
-					<li><a href="#filter" >Near</a></li>
-					<li>/</li>
-					<li><a href="#filter" >Popular</a></li>
-					<li>/</li>
-					<li><a href="#filter" >Surprise</a></li>
-					<li>/</li>
-					<li><a href="#filter" ">Friends</a></li>
+					<li><a {{action 'oldest'}} {{bind-attr class="sortAscending:selected"}} >Oldest</a></li>
+				
+					 
 				</ul>
 			</div>
 										
 
 			<div id="wall">
-				{{#collection App.EListView contentBinding="content"}}
+				{{#collection App.EListView contentBinding="controller.arrangedContent"}}
         	
-        	 			{{view App.TweetView contentBinding="content"}}
+        	 			{{view App.TweetView contentBinding="controller.arrangedContent"}}
         	
         	 	{{else}}
 				   	 loading latest Tweets ...
