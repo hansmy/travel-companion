@@ -251,10 +251,10 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
+		
+		var results = [];
 		if(data!=null){
 		var statuses = data.statuses;
-		var results = [];
-
 		statuses.forEach(function(tweet) {
 
 			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
@@ -279,12 +279,12 @@ app.get('/api/results', function(req, res) {
 			}
 
 		});
-
+}
 		//console.log(statuses);
 		res.jsonp({
 			"result" : results
 		});
-	}
+	
 
 	});
 
