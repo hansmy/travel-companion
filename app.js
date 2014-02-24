@@ -246,12 +246,14 @@ var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
 app.get('/api/results', function(req, res) {
 	
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	console.log(twit);
+	//console.log(twit);
 	twit.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
+		console.log("data");
+		console.log(err);
 		console.log(data);
 		var results = [];
 		if(data!=undefined){
