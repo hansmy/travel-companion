@@ -251,9 +251,9 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-		
+		console.log(data);
 		var results = [];
-		if(data!=null){
+		if(data!=undefined){
 		var statuses = data.statuses;
 		statuses.forEach(function(tweet) {
 
@@ -279,12 +279,12 @@ app.get('/api/results', function(req, res) {
 			}
 
 		});
-}
+		}
 		//console.log(statuses);
 		res.jsonp({
 			"result" : results
 		});
-	
+
 
 	});
 
