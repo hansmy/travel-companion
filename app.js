@@ -75,19 +75,19 @@ var twit = new twitter({
 	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
 	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
 	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
-	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A',
-	search_base : 'https://api.twitter.com/1.1/search'
+	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A'//,
+	//search_base : 'https://api.twitter.com/1.1/search'
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-
+/*
 twit = new twitter({
 consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
 access_token_key : '240243946-8CvFbfNKW1p934JmOdiovKx7Y4m9yicDdqoy02mU',
 access_token_secret : 'vUV2IjnDwzSERugR949RvUmeQmm7drU0upfzeKI08s'
 });
-
+*/
 
 twitter.prototype.search = function(q, params, callback) {
 
@@ -261,9 +261,9 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-		console.log("data");
-		console.log(err);
-		console.log(data);
+		//console.log("data");
+		//console.log(err);
+		//console.log(data);
 		var results = [];
 		if(data!=undefined){
 		var statuses = data.statuses;
@@ -278,7 +278,7 @@ app.get('/api/results', function(req, res) {
 			if (geo) {
 				console.log(tweet.created_at);
 				var date=new Date(tweet.created_at);
-			console.log(date);
+			
 				results.push({
 					id : tweet.id,
 					user : tweet.user.screem_name,
