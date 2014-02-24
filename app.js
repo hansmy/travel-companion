@@ -107,6 +107,7 @@ twitter.prototype.search = function(q, params, callback) {
 	}
 	//question tweets search
 	var url = this.options.search_base + '/tweets.json';
+	console.log(url);
 	params = merge(params, {
 		q : q
 	});
@@ -245,8 +246,11 @@ var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
 app.get('/api/results', function(req, res) {
 	
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
-	//console.log(twit);
-	twit.search("", {
+	console.log(twit);
+	twit.verifyCredentials(function (err, data) {
+    	console.log(data);
+  	})
+	.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
