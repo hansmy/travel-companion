@@ -66,7 +66,19 @@ io.configure(function() {
 //Fixing Bug on ntwitter
 
 
-twitter.prototype.search = function(q, params, callback) {
+
+/***************************************************/
+
+/**Production- TravelCompanionApp on Twitter*/
+
+var twit = new twitter({
+	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
+	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
+	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
+	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A',
+	search_base : 'https://api.twitter.com/1.1/search'
+});
+twit.prototype.search = function(q, params, callback) {
 
 	if ( typeof params === 'function') {
 		callback = params;
@@ -89,26 +101,16 @@ twitter.prototype.search = function(q, params, callback) {
 		return this;
 	}
 	//question tweets search
-	var url = 'https://api.twitter.com/1.1/search'+'/tweets.json';//this.options.search_base + '/tweets.json';
+	var url = 'https://api.twitter.com/1.1/search'+'/tweets.json'//this.options.search_base + '/tweets.json';
 	console.log(url);
 	params = merge(params, {
 		q : q
 	});
 	this.get(url, params, callback);
+
+	
 	return this;
 }
-/***************************************************/
-
-/**Production- TravelCompanionApp on Twitter*/
-
-var twit = new twitter({
-	consumer_key : 'YzhG1i9X0NsxLpLYuvDLcw',
-	consumer_secret : '4PfUoWiMnLQ0GTM6gRGGGl1vxUwyWOEJksDeELMUc',
-	access_token_key : '240243946-Dcbgw1xwkus1wht3BjJpdi9L6aBW9192pTBBRYs6',
-	access_token_secret : '79xtH7JohguP4qY2FRCfeGyFzWvP79YCJLINej9QB0A',
-	search_base : 'https://api.twitter.com/1.1/search'
-});
-
 /**Development- AmbiecitiesApp on Twitter**/
 /*
 twit = new twitter({
@@ -117,6 +119,8 @@ consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
 access_token_key : '240243946-8CvFbfNKW1p934JmOdiovKx7Y4m9yicDdqoy02mU',
 access_token_secret : 'vUV2IjnDwzSERugR949RvUmeQmm7drU0upfzeKI08s'
 });
+
+
 
 /***********************************************************************/
 /*			GeoManagerModule
