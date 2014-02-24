@@ -247,10 +247,7 @@ app.get('/api/results', function(req, res) {
 	
 	var geocode = req.query.lat + "," + req.query.lng + "," + req.query.radio;
 	console.log(twit);
-	twit.verifyCredentials(function (err, data) {
-    	console.log(data);
-  	})
-	.search("", {
+	twit.search("", {
 		"geocode" : geocode,
 		count : 10,
 		result_type : "recent"
