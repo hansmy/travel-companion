@@ -251,7 +251,7 @@ app.get('/api/results', function(req, res) {
 		count : 10,
 		result_type : "recent"
 	}, function(err, data) {
-		
+		if(data!=null){
 		var statuses = data.statuses;
 		var results = [];
 
@@ -284,6 +284,7 @@ app.get('/api/results', function(req, res) {
 		res.jsonp({
 			"result" : results
 		});
+	}
 
 	});
 
