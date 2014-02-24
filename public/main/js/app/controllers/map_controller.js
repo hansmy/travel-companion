@@ -11,7 +11,7 @@ App.MapController = Ember.ObjectController.extend({
 	myLocationBinding : 'controllers.application.myLocation',
 	//Array of Markers
 	markers : Ember.A(),
-	markersBinding : 'controllers.application.results',
+	markersBinding : 'controllers.application.content',
 
 	centerBinding : 'controllers.application.center',
 	init : function() {

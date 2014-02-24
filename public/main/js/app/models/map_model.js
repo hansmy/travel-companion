@@ -157,7 +157,7 @@ App.Result = DS.Model.extend(Ember.LeafletMarkerMixin, {
 		str += "</tr></td></table>"
 		str += "</div>";
 		str += "</div>"
-		str += "<span class='pull-right'><a class='openModal' href='#'> List</a></span>";
+		str += "<span class='pull-right'><a class='openModal' href='#/list/'> List</a></span>";
 
 		str += "</div>"
 		//closing the media-body

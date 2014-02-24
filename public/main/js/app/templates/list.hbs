@@ -21,6 +21,11 @@
 					 
 				</ul>
 			</div>
+
+			{{#if hasNewTweets}}
+
+			<span >You have {{queueLength}} new tweets. <button {{action "unqueueAll"}} class="btn btn-default">Load</button> </span>
+    		{{/if}}
 										
 
 			<div id="wall">
