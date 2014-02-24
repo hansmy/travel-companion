@@ -89,7 +89,7 @@ twitter.prototype.search = function(q, params, callback) {
 		return this;
 	}
 	//question tweets search
-	var url = this.options.search_base + '/tweets.json';
+	var url = 'https://api.twitter.com/1.1/search'+'/tweets.json';//this.options.search_base + '/tweets.json';
 	console.log(url);
 	params = merge(params, {
 		q : q
