@@ -5,6 +5,9 @@ App.ApplicationController = Ember.ObjectController.extend({
 	_idCache : {},
 	_lastTweet : null,
 	_counter : 0,
+	mapDisplay:true,
+	listDisplay:false,
+	newResult:0,
 	center : Ember.Object.create({
 		lat : 51.505,
 		lng : -0.09
@@ -22,9 +25,13 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 		goToMap : function() {
 			this.transitionToRoute('map');
+			this.set('mapDisplay',true);
+			this.set('listDisplay',false);
 		},
 		goToList : function() {
 			this.transitionToRoute('list');
+			this.set('mapDisplay',false);
+			this.set('listDisplay',true);
 		},
 
 		/**
@@ -115,10 +122,35 @@ App.ApplicationController = Ember.ObjectController.extend({
 
 					if (this._lastTweet != null) {
 
-						this._lastTweet.set('icon', L.AwesomeMarkers.icon({
-							icon : 'icon-twitter',
-							color : 'blue'
-						}));
+						
+						var nr=this.get('newResult');
+						var content=this.get('content');
+						console.log(content.get('length'));
+						if(content.get('length')>3&&nr>1){
+							
+							var reverse=content.toArray().reverse();
+							Ember.run.later(this, function(){
+							console.log	(nr);
+							this.set('newResult',0);
+								for (var i=0; i<nr; i++) {
+		   							reverse[i].set('icon', L.AwesomeMarkers.icon({
+										icon : 'icon-twitter',
+										color : 'blue'
+									}));	
+								}
+								
+							});
+
+						}else{
+							this._lastTweet.set('icon', L.AwesomeMarkers.icon({
+								icon : 'icon-twitter',
+								color : 'blue'
+							}));
+							this.set('newResult',0);
+						}
+						
+
+						
 					}
 					
 					this._idCache[id] = twt.id;
@@ -135,17 +167,20 @@ App.ApplicationController = Ember.ObjectController.extend({
 						timestamp:date.getTime()
 					});
 					this._lastTweet = ma;
+
 					Ember.run.later(this, function(){
 					ma.set('icon', L.AwesomeMarkers.icon({
 							icon : 'icon-twitter',
 							color : 'red'
 						}));
-				});
+					var nr=this.get('newResult');
+					nr++;
+					this.set('newResult',nr);
+					});
 				/*	Ember.run.scheduleOnce('afterRender', this, function () {
       //Do it here
  					});*/
 					
-					console.log(ma.get('icon'));
 					
 
 				}
