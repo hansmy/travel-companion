@@ -1,17 +1,17 @@
 
 	
-		{{imageProfile content.tweet}}
+		{{imageProfile tweet}}
 		
 		<div class="media-body">
-			<span class="media-heading"> <strong> {{content.tweet.user.name}}</strong> 
-				<span class='timestamp pull-right'><a class='date_created'> {{ago content.tweet.created_at}} </a></span> </span>
-				{{headerTweet content.tweet}}
+			<span class="media-heading"> <strong> {{tweet.user.name}}</strong> 
+				<span class='timestamp pull-right'><a class='date_created'> {{ago tweet.created_at}} </a></span> </span>
+				{{headerTweet tweet}}
 			</span> 
-		<p>  {{parseTweet content.tweet.text}} + </p>
+		<p>  {{parseTweet tweet.text}} + </p>
 		</div>
 		<div> 
-		{{#if content.tweet.place.country}}
-			<p><span> Location: </span> {{content.tweet.place.country}} </p>
+		{{#if tweet.place.country}}
+			<p><span> Location: </span> {{tweet.place.country}} </p>
 		{{/if}}	
 		</div>
 		

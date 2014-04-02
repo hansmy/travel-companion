@@ -8,6 +8,9 @@ App.ApplicationController = Ember.ObjectController.extend({
 	mapDisplay:true,
 	listDisplay:false,
 	newResult:0,
+	sortProperties: ['timestamp'],
+	isQuaque:true,
+	sortAscending: false,
 	center : Ember.Object.create({
 		lat : 51.505,
 		lng : -0.09

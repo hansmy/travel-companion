@@ -29,9 +29,9 @@
 										
 
 			<div id="wall">
-				{{#collection App.EListView contentBinding="controller.arrangedContent"}}
+				{{#collection App.EListView contentBinding="reverse"}}
         	
-        	 			{{view App.TweetView contentBinding="controller.arrangedContent"}}
+        	 			{{view App.TweetView contentBinding="this"}}
         	
         	 	{{else}}
 				   	 loading latest Tweets ...

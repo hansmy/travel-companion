@@ -1,32 +1,65 @@
 App.ListController = Ember.ArrayController.extend({
-content: Ember.ArrayProxy.create({ content: Ember.A([]) }),
-results:  [],
+
+content:[],
+contentBinding: Ember.Binding.oneWay('controllers.application.content'),
+//results:  [],
 needs:'application',
+index:0,
 statusDisplay:false,
 statusDisplayBinding:'controllers.application.listDisplay',
-resultsBinding: 'controllers.application.content',
+//resultsBinding: Ember.Binding.oneWay('controllers.application.content'),
 sortProperties: ['timestamp'],
 isQuaque:true,
 sortAscending: false,
+init : function() {
+  var x =this.get('content');
+  var r=x.set('sortProperties',['timestamp']);
+   var yy=x.set('sortAscending',false);
+  },
+
+  sortedContent: (function() {
+    var content;
+    content = this.get("content") || [];
+    return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
+      content: content.toArray(),
+      sortProperties: this.get('sortProperties'),
+      sortAscending: this.get('sortAscending')
+    });
+  }).property("content.@each", 'sortProperties', 'sortAscending'),
+
+  doSort: function(sortBy) {
+    var previousSortBy;
+    previousSortBy = this.get('sortProperties.0');
+    if (sortBy === previousSortBy) {
+      return this.set('sortAscending', !this.get('sortAscending'));
+    } else {
+      set('sortAscending', true);
+      return this.set('sortProperties', [sortBy]);
+    }
+  },
 reverse: function(){
-        return this.get('content').toArray().reverse();
-    }.property('content.@each').cacheable(),
+  //property sorted content
+   return this.get('sortedContent');
+}.property('index','sortAscending','sortProperties').cacheable(),
   
  load: function(){
-  var results=this.get('results');
-  var content= this.get('content.length');
+  var content=this.get('content');
+ 
+  
+  var contentLength=this.get('content.length');
+
   var statusDisplay=this.get('statusDisplay');
-  console.log(content);
-  if(content<=6||statusDisplay){
+ 
+  var index= this.get('index');
+  //more than 6 result
+  if(contentLength<=6||statusDisplay){
     this.set('statusDisplay',false);
-    var content=this.get('content');
-    content.clear();
-    results.forEach(function(item, index) {
-        content.pushObject(item)
-    });
-      this.set("content", content);
+
+   
+   this.set('index', contentLength);
+ 
   }
- }.observes('results.length','statusDisplay'),
+ }.observes('content.length','statusDisplay'),
  hasNewTweets: function(){
     if(this.get("queueLength") > 0 ){
       this.set("isQuaque", true);
@@ -35,28 +68,35 @@ reverse: function(){
   }.property("queueLength"),
   
   queueLength: function(){
-    return this.get("results.length") - this.get("content.length");
-  }.property("results.[]","isQuaque"),
+    return this.get("content.length") - this.get("index");
+
+  }.property("content.[]","isQuaque"),
 
   actions: {
     recent: function() {
-      if(this.get('sortAscending')==true)
+      if(this.get('sortAscending')==true){
       this.set('sortAscending', false);
+      
+      //  content.set('sortAscending', false);
+      this.set('index',this.get('content.length'))
+      }
     },
 
     oldest: function() {
-        if(this.get('sortAscending')==false)
-      this.set('sortAscending', true);
+        if(this.get('sortAscending')==false){
+        //var content=this.get('content.arrangedContent');
+       // content.set('sortAscending', true);
+        this.set('sortAscending', true);
+        this.set('index',this.get('content.length'))
+      }
     },
     unqueueAll: function(){
-      var content=this.get('content');
-      var results= this.get('results');
-      results=results.slice(0,this.get("results.length"));
-      content.clear();
-      results.forEach(function(item, index) {
-        content.pushObject(item)
-    });
-      this.set("content", results);
+
+      var results= this.get('content');
+      var org=results.get('arrangedContent');
+      var index= this.get('index');
+      this.set('index',this.get('content.length'));
+   
       this.set("isQuaque", false);
 
     }
