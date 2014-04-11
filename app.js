@@ -259,7 +259,10 @@ var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
 ////http://localhost:3000/api/results/q=macacu&geocode=-22.912214,-43.230182,1km&lang=pt&result_type=recent
 app.get('/api/results', function(req, res) {
 	
+
 	var geocode = req.query.lat + "," + req.query.lng + "," + "5km";//req.query.radio;
+
+
 	//console.log(twit);
 	twit.search("", {
 		"geocode" : geocode,
