@@ -1,7 +1,8 @@
 {
-  "name": "application-name",
+  "name": "ambiecities",
   "version": "0.0.1",
   "private": true,
+  "engine":"*",
   "scripts": {
     "start": "node app",
     "test": "make test"

@@ -80,14 +80,14 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-
+/*
 twit = new twitter({
 consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
 access_token_key : '240243946-8CvFbfNKW1p934JmOdiovKx7Y4m9yicDdqoy02mU',
 access_token_secret : 'vUV2IjnDwzSERugR949RvUmeQmm7drU0upfzeKI08s'
 });
-
+*/
 
 twitter.prototype.search = function(q, params, callback) {
 
@@ -201,7 +201,8 @@ var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
 		var idInterval;
 		//twit.stream('statuses/filter', {'locations':'180,-90,180,90'}, function(stream) {
 		stream.on('data', function(tweet) {
-			
+			console.log(tweet);
+		//if client is in a new location.
 			//io.sockets.volatile.emit('tweet', data);
 			//socket.volatile.emit('tweet', data);
 			var geo = tweet.geo ? tweet.geo : (tweet.retweeted_status ? tweet.retweeted_status.geo : null);
@@ -218,6 +219,10 @@ var source = Rx.Observable.fromEvent(geoEmitter, 'new-twitter-location');
 
 		stream.on('end', function(response) {
 			// Handle a disconnection
+		});
+
+		stream.on('eerror', function(response) {
+			console.log(response);
 		});
 		stream.on('destroy', function(response) {
 			// Handle a 'silent' disconnection from Twitter, no end/error event fired
