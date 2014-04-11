@@ -15,9 +15,22 @@ App.ApplicationController = Ember.ObjectController.extend({
 	init : function() {
 
 		//Sends ation to get the users location in the map.
+		
+		that=this;
+		
 		Ember.run.later(this, function() {
-			this.send('getLiveTweets')
+				this.send('getLiveTweets')
 		});
+
+		$.getJSON('places.json', function(data) {
+  			var location= Math.floor(Math.random()*data.places.length);
+  			var place=data.places[location];
+  			that.set('center',Ember.Object.create({
+									lat : place.lat,
+									lng : place.lng
+						}));
+		});
+
 
 	},
 
