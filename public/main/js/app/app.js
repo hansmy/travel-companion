@@ -56,7 +56,7 @@ App.Adapter = DS.RESTAdapter.extend({
 
 DS.RESTAdapter.reopen({
 	//host : "http://localhost:3000",
-	host : "http://ambiecities.heroku.com",
+	host : "http://ambiecities.herokuapp.com",
 	namespace : "api"
 });
 /*App.store = DS.Store.create({
