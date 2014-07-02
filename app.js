@@ -80,14 +80,14 @@ var twit = new twitter({
 });
 
 /**Development- AmbiecitiesApp on Twitter**/
-/*
+
 twit = new twitter({
 consumer_key : 'cMEy1pyWtlcqwet3dJZErw',
 consumer_secret : '0B0P5ptETBvgXmgiqUjVmEplt75P6a8QTcBO7xcizG0',
 access_token_key : '240243946-8CvFbfNKW1p934JmOdiovKx7Y4m9yicDdqoy02mU',
 access_token_secret : 'vUV2IjnDwzSERugR949RvUmeQmm7drU0upfzeKI08s'
 });
-*/
+
 
 twitter.prototype.search = function(q, params, callback) {
 
@@ -261,8 +261,6 @@ app.get('/api/results', function(req, res) {
 	
 
 	var geocode = req.query.lat + "," + req.query.lng + "," + "5km";//req.query.radio;
-
-
 	//console.log(twit);
 	twit.search("", {
 		"geocode" : geocode,
